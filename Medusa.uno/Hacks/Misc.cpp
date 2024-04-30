@@ -2903,30 +2903,30 @@ void Misc::updateClanTag(bool tagChanged) noexcept
         {
             switch (time % 24)
             {
-            case 0: { memory->setClanTag(skCrypt(" Medusa.un "), skCrypt(" Medusa.un ")); break; }
-            case 1: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 2: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 3: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 4: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 5: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 6: { memory->setClanTag(skCrypt(" Medusa.uno "), skCrypt(" Medusa.uno ")); break; }
-            case 7: { memory->setClanTag(skCrypt(" Medusa.un "), skCrypt(" Medusa.un ")); break; }
-            case 8: { memory->setClanTag(skCrypt(" Medusa.u "), skCrypt(" Medusa.u ")); break; }
-            case 9: { memory->setClanTag(skCrypt(" Medusa "), skCrypt(" Medusa ")); break; }
-            case 10: { memory->setClanTag(skCrypt(" Medus "), skCrypt(" Medus ")); break; }
-            case 11: { memory->setClanTag(skCrypt(" Medu "), skCrypt(" Medu ")); break; }
-            case 12: { memory->setClanTag(skCrypt(" Med "), skCrypt(" Med ")); break; }
-            case 13: { memory->setClanTag(skCrypt(" Me "), skCrypt(" Me ")); break; }
-            case 14: { memory->setClanTag(skCrypt(" M "), skCrypt(" M ")); break; }
+            case 0: { memory->setClanTag(skCrypt(" joeware.c "), skCrypt(" joeware.c ")); break; }
+            case 1: { memory->setClanTag(skCrypt(" joeware.cc "), skCrypt(" joeware.cc ")); break; }
+            case 2: { memory->setClanTag(skCrypt(" joeware.cc "), skCrypt(" joeware.cc ")); break; }
+            case 3: { memory->setClanTag(skCrypt(" joeware.cc "), skCrypt(" joeware.cc ")); break; }
+            case 4: { memory->setClanTag(skCrypt(" joeware.cc "), skCrypt(" joeware.cc ")); break; }
+            case 5: { memory->setClanTag(skCrypt(" joeware.cc "), skCrypt(" joeware.cc ")); break; }
+            case 6: { memory->setClanTag(skCrypt(" joeware.c "), skCrypt(" joeware.c ")); break; }
+            case 7: { memory->setClanTag(skCrypt(" joeware. "), skCrypt(" joeware. ")); break; }
+            case 8: { memory->setClanTag(skCrypt(" joeware "), skCrypt(" joeware ")); break; }
+            case 9: { memory->setClanTag(skCrypt(" joewar "), skCrypt(" joewar ")); break; }
+            case 10: { memory->setClanTag(skCrypt(" joewa "), skCrypt(" joewa ")); break; }
+            case 11: { memory->setClanTag(skCrypt(" joew "), skCrypt(" joew ")); break; }
+            case 12: { memory->setClanTag(skCrypt(" joe "), skCrypt(" joe ")); break; }
+            case 13: { memory->setClanTag(skCrypt(" jo "), skCrypt(" jo ")); break; }
+            case 14: { memory->setClanTag(skCrypt(" j "), skCrypt(" j ")); break; }
             case 15: { memory->setClanTag("", ""); break; }
-            case 16: { memory->setClanTag(skCrypt(" M "), skCrypt(" M ")); break; }
-            case 17: { memory->setClanTag(skCrypt(" Me "), skCrypt(" Me ")); break; }
-            case 18: { memory->setClanTag(skCrypt(" Med "), skCrypt(" Med ")); break; }
-            case 19: { memory->setClanTag(skCrypt(" Medu "), skCrypt(" Medu ")); break; }
-            case 20: { memory->setClanTag(skCrypt(" Medus "), skCrypt(" Medus ")); break; }
-            case 21: { memory->setClanTag(skCrypt(" Medusa "), skCrypt(" Medusa ")); break; }
-            case 22: { memory->setClanTag(skCrypt(" Medusa. "), skCrypt(" Medusa. ")); break; }
-            case 23: { memory->setClanTag(skCrypt(" Medusa.u "), skCrypt(" Medusa.u ")); break; }
+            case 16: { memory->setClanTag(skCrypt(" j "), skCrypt(" j ")); break; }
+            case 17: { memory->setClanTag(skCrypt(" jo "), skCrypt(" jo ")); break; }
+            case 18: { memory->setClanTag(skCrypt(" joe "), skCrypt(" joe ")); break; }
+            case 19: { memory->setClanTag(skCrypt(" joew "), skCrypt(" joew ")); break; }
+            case 20: { memory->setClanTag(skCrypt(" joewa "), skCrypt(" joewa ")); break; }
+            case 21: { memory->setClanTag(skCrypt(" joewar "), skCrypt(" joewar ")); break; }
+            case 22: { memory->setClanTag(skCrypt(" joeware "), skCrypt(" joeware ")); break; }
+            case 23: { memory->setClanTag(skCrypt(" joreware. "), skCrypt(" joreware. ")); break; }
             }
 
         }
