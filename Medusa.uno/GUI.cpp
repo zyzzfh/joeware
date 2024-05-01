@@ -948,7 +948,7 @@ void GUI::renderChamsWindow() noexcept
     ImGui::Checkbox(skCrypt("Health based"), &chams.healthBased); 
     ImGui::Checkbox(skCrypt("Blinking"), &chams.blinking);
     ImGui::PushItemWidth(130.0f);
-    ImGui::Combo("Material", &chams.material, "\0Normal\0Flat\0Animated\0Platinum\0Glass\0Chrome\0Crystal\0Plastic\0Glow\0Silver\0Pearlescent\0Metallic\0Smoke Light\0Smoke Dark\0Water\0Bush\0MP3 Detail\0Snowflakes\0");
+    ImGui::Combo("Material", &chams.material, "Normal\0Flat\0Animated\0Platinum\0Glass\0Chrome\0Crystal\0Plastic\0Glow\0Silver\0Pearlescent\0Metallic\0Smoke Light\0Smoke Dark\0Water\0Bush\0MP3 Detail\0Snowflakes\0");
     ImGui::PopItemWidth();
     ImGui::Checkbox(skCrypt("Wireframe"), &chams.wireframe);
     ImGui::Checkbox(skCrypt("Cover"), &chams.cover);
