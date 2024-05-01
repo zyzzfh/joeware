@@ -948,7 +948,7 @@ void GUI::renderChamsWindow() noexcept
     ImGui::Checkbox(skCrypt("Health based"), &chams.healthBased); 
     ImGui::Checkbox(skCrypt("Blinking"), &chams.blinking);
     ImGui::PushItemWidth(130.0f);
-    ImGui::Combo("Material", &chams.material, "Normal\0Flat\0Animated\0Platinum\0Glass\0Chrome\0Crystal\0Silver\0Gold\0Plastic\0Glow\0Pearlescent\0Metallic\0Smoke Light\0Smoke Dark\0Water\0Bush\0MP3 Detail\0Snowflakes\0");
+    ImGui::Combo("Material", &chams.material, "\0Normal\0Flat\0Animated\0Platinum\0Glass\0Chrome\0Crystal\0Plastic\0Glow\0Silver\0Pearlescent\0Metallic\0Smoke Light\0Smoke Dark\0Water\0Bush\0MP3 Detail\0Snowflakes\0");
     ImGui::PopItemWidth();
     ImGui::Checkbox(skCrypt("Wireframe"), &chams.wireframe);
     ImGui::Checkbox(skCrypt("Cover"), &chams.cover);
@@ -2956,9 +2956,9 @@ void GUI::renderGuiStyle() noexcept
                 ImVec2 pos;
                 const char* text;
                 const char* text1;
-                text = "either i walk like a king or idgaf who the king is";
-                text1 = "";              
-                if (text == "either i walk like a king or idgaf who the king is")
+                text = ""; //menu text
+                text1 = "  ";              
+                if (text == "")
                 {
                     pos = ImGui::GetWindowPos();
                     draw = ImGui::GetWindowDrawList();
@@ -2966,8 +2966,8 @@ void GUI::renderGuiStyle() noexcept
                     {
                         draw->AddText(fonts.logo, 20.f, ImVec2(pos.x - 16.5f + 1, pos.y + 2), Helpers::calculateColor(config->menu.accentColor, 0.5f), skCrypt(" "));
                         draw->AddText(fonts.logo, 20.f, ImVec2(pos.x - 16.5f, pos.y + 3), ImColor(255.f, 255.f, 255.f, 255.f), skCrypt(""));
-                        draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f + 1, pos.y + 2), Helpers::calculateColor(config->menu.accentColor, 0.5f), skCrypt("either i walk like a king or idgaf who the king is"));
-                        draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f, pos.y + 1), ImColor(255.f, 255.f, 255.f, 255.f), skCrypt("either i walk like a king or idgaf who the king is"));
+                        draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f + 1, pos.y + 2), Helpers::calculateColor(config->menu.accentColor, 0.5f), skCrypt("")); //menu text
+                        draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f, pos.y + 1), ImColor(255.f, 255.f, 255.f, 255.f), skCrypt("")); //menu text
                         ImGui::SameLine();
                         ImGui::PushFont(fonts.verdana);
                         if (activeTab == 4)

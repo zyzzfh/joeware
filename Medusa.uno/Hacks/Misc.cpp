@@ -2251,7 +2251,7 @@ void Misc::Indictators() noexcept
         {
             if (config->tickbase.hideshots.isActive())
             {
-                std::string indicator = c_xor("ONSHOT");
+                std::string indicator = c_xor("OSAA");
                 Color color = Color(255, 255, 255, 200);
                 Render::gradient(14, height - 340 - h - 3, Render::textWidth(hooks->IndShadow, indicator.c_str()) / 2, 33, Color(0, 0, 0, 0), Color(0, 0, 0, 165), Render::GradientType::GRADIENT_HORIZONTAL);
                 Render::gradient(14 + Render::textWidth(hooks->IndShadow, indicator.c_str()) / 2, height - 340 - h - 3, Render::textWidth(hooks->IndShadow, indicator.c_str()) / 2, 33, Color(0, 0, 0, 165), Color(0, 0, 0, 0), Render::GradientType::GRADIENT_HORIZONTAL);
@@ -2926,7 +2926,7 @@ void Misc::updateClanTag(bool tagChanged) noexcept
             case 20: { memory->setClanTag(skCrypt(" joewa "), skCrypt(" joewa ")); break; }
             case 21: { memory->setClanTag(skCrypt(" joewar "), skCrypt(" joewar ")); break; }
             case 22: { memory->setClanTag(skCrypt(" joeware "), skCrypt(" joeware ")); break; }
-            case 23: { memory->setClanTag(skCrypt(" joreware. "), skCrypt(" joreware. ")); break; }
+            case 23: { memory->setClanTag(skCrypt(" joreware. "), skCrypt(" joerware. ")); break; }
             }
 
         }
