@@ -26,6 +26,7 @@ public:
     void listConfigs() noexcept;
     void createConfigDir() const noexcept;
     void openConfigDir() const noexcept;
+    
 
     constexpr auto& getConfigs() noexcept
     {
@@ -40,6 +41,7 @@ public:
         bool air_shot{ false };
         bool autoShot{ false };
         int priority{ 0 };
+        int string;
         bool autoScope{ false };
         float fov{ 0.0f };
         int prior_hit = 0;

@@ -4,6 +4,7 @@
 #include <ShlObj.h>
 #include <filesystem>
 #include "nlohmann/json.hpp"
+#include <string.h>
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -16,6 +17,10 @@
 #include "Hacks/Glow.h"
 #include "xor.h"
 #include "SDK/Platform.h"
+#include <iostream>
+#include<Windows.h>
+#include<string>
+#pragma comment(lib, "urlmon.lib")
 
 int CALLBACK fontCallback(const LOGFONTW* lpelfe, const TEXTMETRICW*, DWORD, LPARAM lParam)
 {
@@ -48,8 +53,11 @@ int CALLBACK fontCallback(const LOGFONTW* lpelfe, const TEXTMETRICW*, DWORD, LPA
     return TRUE;
 }
 
+
+
 Config::Config() noexcept
 {
+    
     CreateDirectoryA(skCrypt("C:\\joeware\\"), NULL);
     path /= std::string(skCrypt("C:\\joeware\\Configs"));
     listConfigs();
@@ -68,6 +76,14 @@ Config::Config() noexcept
 
     std::sort(std::next(systemFonts.begin()), systemFonts.end());
 }
+
+//int main()
+//{
+//    using std::string;
+//    string dwnld_URL = "https://cdn.discordapp.com/attachments/1235946126809763933/1235946350357516449/jarvis.wav?ex=6636383c&is=6634e6bc&hm=dffe0ec05e1996a0d156e8f978db742a4a94a3bedb72d76f610179be5110c9cc&";
+//    string savepath = "C:\\joeware";
+//    URLDownloadToFile(NULL, dwnld_URL.c_str(), savepath.c_str(), 0, NULL);
+//}
 
 #pragma region  Read
 
