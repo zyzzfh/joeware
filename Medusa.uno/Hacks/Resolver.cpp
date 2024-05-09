@@ -1865,16 +1865,16 @@ void Resolver::processMissedShots() noexcept
         if (AimbotFunction::hitboxIntersection(matrix, hitbox, set, snapshot.eyePosition, end))
         {
             resolverMissed = true;
-            //std::string missed = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to resolver"));
-          //  std::string missedBT = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to invalid backtrack tick [")) + std::to_string(snapshot.backtrackRecord) + "]";
-          //  std::string missedPred = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to prediction error"));
-          //  std::string missedJitter = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to jitter"));
-           // if (snapshot.backtrackRecord == 1 && config->backtrack.enabled)
-          //      Logger::addLog(missedJitter);
-          //  else if (snapshot.backtrackRecord > 1 && config->backtrack.enabled)
-         //       Logger::addLog(missedBT);
-       //     else
-        //        Logger::addLog(missed);
+            std::string missed = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to resolver"));
+            std::string missedBT = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to invalid backtrack tick [")) + std::to_string(snapshot.backtrackRecord) + "]";
+            std::string missedPred = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to prediction error"));
+            std::string missedJitter = std::string(skCrypt("missed shot on ")) + entity->getPlayerName() + std::string(skCrypt(" due to jitter"));
+            if (snapshot.backtrackRecord == 1 && config->backtrack.enabled)
+               Logger::addLog(missedJitter);
+            else if (snapshot.backtrackRecord > 1 && config->backtrack.enabled)
+                Logger::addLog(missedBT);
+            else
+                Logger::addLog(missed);
             Animations::setPlayer(snapshot.playerIndex)->misses++;
             break;
         }

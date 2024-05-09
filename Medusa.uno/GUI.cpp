@@ -617,7 +617,7 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
     }
     ImGui::EndChild();
     ImGui::Columns(2, nullptr, false);
-    ImGui::SetColumnOffset(1, 277.0f);
+    ImGui::SetColumnOffset(1, 277.0f); 
     ImGui::PushItemWidth(190.0f);
     ImGui::Checkbox(skCrypt("Silent"), &config->ragebot.silent);
     ImGui::Checkbox(skCrypt("Friendly fire"), &config->ragebot.friendlyFire);

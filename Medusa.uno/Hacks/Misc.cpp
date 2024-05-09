@@ -431,12 +431,12 @@ public:
             //Certain characters are censured on printf
             if (jumps > 2)
                 memory->clientMode->getHudChat()->printf(0,
-                    skCrypt(" [Medusa.uno] %c%s: %.2f units \x01[\x05%d\x01 Strafes | \x05%.0f\x01 Pre | \x05%.0f\x01 Max | \x05%.1f\x01 Height | \x05%d\x01 Bhops | \x05%.0f\x01 Sync]"),
+                    skCrypt(" [JOEWARE] %c%s: %.2f units \x01[\x05%d\x01 Strafes | \x05%.0f\x01 Pre | \x05%.0f\x01 Max | \x05%.1f\x01 Height | \x05%d\x01 Bhops | \x05%.0f\x01 Sync]"),
                     color, jump.c_str(),
                     jumpStatsCalculations.units, jumpStatsCalculations.strafes, jumpStatsCalculations.pre, jumpStatsCalculations.maxVelocity, jumpStatsCalculations.maxHeight, jumpStatsCalculations.jumps, jumpStatsCalculations.sync);
             else
                 memory->clientMode->getHudChat()->printf(0,
-                    skCrypt(" [Medusa.uno] %c%s: %.2f units \x01[\x05%d\x01 Strafes | \x05%.0f\x01 Pre | \x05%.0f\x01 Max | \x05%.1f\x01 Height | \x05%.0f\x01 Sync]"),
+                    skCrypt(" [JOEWARE] %c%s: %.2f units \x01[\x05%d\x01 Strafes | \x05%.0f\x01 Pre | \x05%.0f\x01 Max | \x05%.1f\x01 Height | \x05%.0f\x01 Sync]"),
                     color, jump.c_str(),
                     jumpStatsCalculations.units, jumpStatsCalculations.strafes, jumpStatsCalculations.pre, jumpStatsCalculations.maxVelocity, jumpStatsCalculations.maxHeight, jumpStatsCalculations.sync);
         }
@@ -1313,7 +1313,7 @@ void Misc::ebdetections(UserCmd* cmd)
         VelocitiesForDetection.clear();
         lastEBDETECT = memory->globalVars->realtime;
         if (config->misc.ebdetect.chat)
-            memory->clientMode->getHudChat()->printf(0, skCrypt("[Medusa.uno] Edge bugged"));
+            memory->clientMode->getHudChat()->printf(0, skCrypt("[JOEWARE] Edge bugged"));
         if (config->misc.ebdetect.effect)
             localPlayer->HealthBoostTime() = memory->globalVars->currenttime + config->misc.ebdetect.effectTime;
         if (config->misc.ebdetect.sound == 0)
@@ -2452,7 +2452,7 @@ void Misc::Indictators() noexcept
             offset += 1;
         }
         interfaces->surface->setDrawColor(255, 255, 255, 255);
-        interfaces->surface->drawLine(s.x / 2 + 7, s.y / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"MEDUSA.UNO").second + 9, s.x / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"MEDUSA.UNO").first + 7, s.y / 2 + 9 + interfaces->surface->getTextSize(hooks->smallFonts, L"MEDUSA.UNO").second);
+        interfaces->surface->drawLine(s.x / 2 + 7, s.y / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").second + 9, s.x / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").first + 7, s.y / 2 + 9 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").second);
         if ((config->misc.indicators.toShow & 1 << ITriggerBot) == 1 << ITriggerBot)
         {
             if (config->triggerbotKey.isActive() && config->lgb.enableTriggerbot)
@@ -2926,7 +2926,7 @@ void Misc::updateClanTag(bool tagChanged) noexcept
             case 20: { memory->setClanTag(skCrypt(" joewa "), skCrypt(" joewa ")); break; }
             case 21: { memory->setClanTag(skCrypt(" joewar "), skCrypt(" joewar ")); break; }
             case 22: { memory->setClanTag(skCrypt(" joeware "), skCrypt(" joeware ")); break; }
-            case 23: { memory->setClanTag(skCrypt(" joreware. "), skCrypt(" joerware. ")); break; }
+            case 23: { memory->setClanTag(skCrypt(" joeware. "), skCrypt(" joeware. ")); break; }
             }
 
         }
@@ -4765,7 +4765,7 @@ void Misc::voteRevealer(GameEvent& event) noexcept
     const char color = !votedYes ? '\x06' : '\x07';
     if (!memory->clientMode->getHudChat())
         return;
-    memory->clientMode->getHudChat()->printf(0, skCrypt(" Medusa.uno | %s voted %c%s"), isLocal ? localPlayer.get()->getPlayerName().c_str() : entity->getPlayerName().c_str(), color, !votedYes ? "Yes" : "No");
+    memory->clientMode->getHudChat()->printf(0, skCrypt(" JOEWARE | %s voted %c%s"), isLocal ? localPlayer.get()->getPlayerName().c_str() : entity->getPlayerName().c_str(), color, !votedYes ? "Yes" : "No");
 }
 
 #include "../SDK/ProtobufReader.h"
@@ -4794,7 +4794,7 @@ void Misc::onVoteStart(const void* data, int size) noexcept
     const auto isLocal = localPlayer && entity == localPlayer.get();
 
     const auto voteType = reader.readInt32(3);
-    std::string cock = c_xor("Medusa.uno | ") + entity->getPlayerName() + c_xor(" called a vote to ") + voteName(voteType);
+    std::string cock = c_xor("JOEWARE | ") + entity->getPlayerName() + c_xor(" called a vote to ") + voteName(voteType);
     memory->clientMode->getHudChat()->printf(0, cock.c_str());
 
     //memory->clientMode->getHudChat()->printf(0, " \x0C\u2022Osiris\u2022 %c%s\x01 call vote (\x06%s\x01)", isLocal ? '\x01' : '\x06', isLocal ? "You" : entity->getPlayerName().c_str(), voteName(voteType));
@@ -4805,7 +4805,7 @@ void Misc::onVotePass() noexcept
     if (!config->misc.revealVotes)
         return;
 
-    memory->clientMode->getHudChat()->printf(0, skCrypt("Medusa.uno | Vote passed"));
+    memory->clientMode->getHudChat()->printf(0, skCrypt("JOEWARE | Vote passed"));
 
     //memory->clientMode->getHudChat()->printf(0, " \x0C\u2022Osiris\u2022\x01 Vote\x06 PASSED");
 }
@@ -4815,7 +4815,7 @@ void Misc::onVoteFailed() noexcept
     if (!config->misc.revealVotes)
         return;
 
-    memory->clientMode->getHudChat()->printf(0, skCrypt("Medusa.uno | Vote failed"));
+    memory->clientMode->getHudChat()->printf(0, skCrypt("JOEWARE | Vote failed"));
 
     //memory->clientMode->getHudChat()->printf(0, " \x0C\u2022Osiris\u2022\x01 Vote\x07 FAILED");
 }

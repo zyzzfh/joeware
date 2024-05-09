@@ -100,7 +100,7 @@ void Logger::getEvent(GameEvent* event) noexcept
                 nothing = c_xor("0 hp remaining)");
             else
                 nothing = std::to_string((player->health() - event->getInt(skCrypt("dmg_health")))) + c_xor(" hp remaining)");
-            log.text = std::string(skCrypt("hit ")) + player->getPlayerName() + c_xor(" in ") + hitgroup + c_xor(" for ") + damage + " (" + nothing /* + "\n"*/;
+            log.text = std::string(skCrypt("hit ")) + player->getPlayerName() + c_xor(" in ") + hitgroup + c_xor(" for ") + damage + " (" + nothing  /* + "\n"*/;
         }
         else if (hurt == localPlayer->index() && attack != localPlayer->index())
         {
@@ -269,7 +269,7 @@ void Logger::console() noexcept
 
     for (auto log : logs)
     {
-        Helpers::logConsole(c_xor("[Medusa.uno] "), color);
+        Helpers::logConsole(c_xor("[joeware] "), color);
         Helpers::logConsole(log.text + "\n");
     }
 
