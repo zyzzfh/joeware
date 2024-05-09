@@ -1,4 +1,4 @@
 
-https://github.com/zyzzfh/joeware/assets/84226835/c8e7b4c2-0c5a-43f0-80d0-7a5a4aa22c7d
-Uploading joeware 2.mp4…
+
+https://github.com/zyzzfh/joeware/assets/84226835/2ac12d78-90af-477f-b11d-6ad2af36d1ea
 
