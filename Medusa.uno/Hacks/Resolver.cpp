@@ -1082,15 +1082,15 @@ void Resolver::SetMode(adjust_data* record) {
 
     // if on ground, moving, and not fakewalking.
     if ((record->m_flags & FL_ONGROUND) && speed > 0.1f && !record->m_fake_walk)
-        record->m_mode = Modes::RESOLVE_WALK;
+        record->m_mode = Modes::RESOLVE_WALK; //WALKING
 
     // if on ground, not moving or fakewalking.
     if ((record->m_flags & FL_ONGROUND) && (speed <= 0.1f || record->m_fake_walk))
-        record->m_mode = Modes::RESOLVE_STAND;
+        record->m_mode = Modes::RESOLVE_STAND; //STAND
 
     // if not on ground.
     else if (!(record->m_flags & FL_ONGROUND))
-        record->m_mode = Modes::RESOLVE_AIR;
+        record->m_mode = Modes::RESOLVE_AIR; //AIR
 }
 
 void Resolver::MatchShot(adjust_data* data, Entity* entity) {
@@ -1880,7 +1880,7 @@ void Resolver::processMissedShots() noexcept
         }
     }
     if (!resolverMissed)
-        Logger::addLog(std::string(skCrypt("missed shot due to spread")));
+        Logger::addLog(std::string(skCrypt("missed shot due to ?")));
 }
 
 void Resolver::runPreUpdate(Animations::Players player, Animations::Players prev_player, Entity* entity) noexcept
