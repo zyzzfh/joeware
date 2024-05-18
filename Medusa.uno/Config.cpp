@@ -487,7 +487,7 @@ static void from_json(const json& j, Config::Visuals& v)
     read(j, "No grass", v.noGrass);
     read(j, "No shadows", v.noShadows);
     read<value_t::object>(j, "Motion Blur", v.motionBlur);
-    read<value_t::object>(j, "Shadows changer", v.shadowsChanger);
+   // read<value_t::object>(j, "Shadows changer", v.shadowsChanger);
     read(j, "Full bright", v.fullBright);
     read(j, "Zoom", v.zoom);
     read(j, "Zoom key", v.zoomKey);
@@ -704,13 +704,13 @@ static void from_json(const json& j, Config::Visuals::Fog& f)
     read(j, "Density", f.density);
 }
 
-static void from_json(const json& j, Config::Visuals::ShadowsChanger& sw)
+/*static void from_json(const json& j, Config::Visuals::ShadowsChanger& sw)
 {
     read(j, "Enabled", sw.enabled);
     read(j, "X", sw.x);
     read(j, "Y", sw.y);
 }
-
+*/
 static void from_json(const json& j, Config::Visuals::Viewmodel& vxyz)
 {
     read(j, "Enabled", vxyz.enabled);
@@ -1386,13 +1386,13 @@ static void to_json(json& j, const Config::Visuals::Fog& o, const Config::Visual
     WRITE("Density", density);
 }
 
-static void to_json(json& j, const Config::Visuals::ShadowsChanger& o, const Config::Visuals::ShadowsChanger& dummy)
+/*static void to_json(json& j, const Config::Visuals::ShadowsChanger& o, const Config::Visuals::ShadowsChanger& dummy)
 {
     WRITE("Enabled", enabled);
     WRITE("X", x);
     WRITE("Y", y);
 }
-
+*/
 static void to_json(json& j, const Config::Visuals::Viewmodel& o, const Config::Visuals::Viewmodel& dummy)
 {
     WRITE("Enabled", enabled);
@@ -1656,8 +1656,8 @@ static void to_json(json& j, const Config::Visuals& o)
     WRITE("No blur", noBlur);
     WRITE("No scope overlay", noScopeOverlay);
     WRITE("No grass", noGrass);
-    //WRITE("No shadows", noShadows);
-    WRITE("Shadows changer", shadowsChanger);
+    WRITE("No shadows", noShadows);
+   // WRITE("Shadows changer", shadowsChanger);
     WRITE("Motion Blur", motionBlur);
     WRITE("Full bright", fullBright);
     WRITE("Zoom", zoom);

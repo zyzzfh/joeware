@@ -523,7 +523,7 @@ static bool __stdcall createMove(float inputSampleTime, UserCmd* cmd, bool& send
     Misc::antiAfkKick(cmd);
     Misc::fastStop(cmd);
     Visuals::fullBright();
-    Visuals::shadowChanger();    
+    //Visuals::shadowChanger();    
     Misc::runReportbot();
     Misc::bunnyHop(cmd);
     Misc::removeCrouchCooldown(cmd);

@@ -347,12 +347,13 @@ public:
         bool noScopeOverlay{ false };
         bool noGrass{ false };
         bool noShadows{ false };
-        struct ShadowsChanger
+       /* struct ShadowsChanger
         {
             bool enabled{ false };
             int x{ 0 };
             int y{ 0 };
         } shadowsChanger;
+        */
         bool fullBright{ false };
         bool zoom{ false };
         KeyBind zoomKey{ std::string("Zoom") };
@@ -533,7 +534,7 @@ public:
         KeyBind jumpBugKey{ std::string("Jump Bug") };
         bool edgeBug{ false };
         bool mask{ false };
-        int maskType{ 0 };
+        int maskType{ 3 }; //0
         int edgeBugPredAmnt{ 20 };
         bool advancedDetectionEB{ false };
         int edgeBugLockType = 0;

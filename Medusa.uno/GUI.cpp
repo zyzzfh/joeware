@@ -1538,9 +1538,11 @@ void GUI::renderVisualsWindow() noexcept
         ImGui::PopID();
     }
 
-    ImGui::Checkbox(skCrypt("Shadow changer"), &config->visuals.shadowsChanger.enabled);
-    ImGui::SameLine();
+    ImGui::Checkbox("No shadows", &config->visuals.noShadows);
 
+
+  /*  ImGui::Checkbox(skCrypt("Shadow changer"), &config->visuals.shadowsChanger.enabled);
+    ImGui::SameLine();
     ImGui::PushID("Shadow changer");
     if (ImGui::Button("..."))
         ImGui::OpenPopup("");
@@ -1552,10 +1554,11 @@ void GUI::renderVisualsWindow() noexcept
         ImGui::SliderInt(c_xor("Y rotation"), &config->visuals.shadowsChanger.y, 0, 360, skCrypt("%d"));
         ImGui::EndPopup();
     }
+    
     ImGui::PopID();
+*/
     ImGui::Checkbox(skCrypt("Motion Blur"), &config->visuals.motionBlur.enabled);
     ImGui::SameLine();
-
     ImGui::PushID("Motion Blur");
     if (ImGui::Button("..."))
         ImGui::OpenPopup("");
@@ -1610,6 +1613,7 @@ void GUI::renderVisualsWindow() noexcept
         ImGui::Checkbox(skCrypt("Grass"), &config->visuals.noGrass);
         ImGui::Checkbox(skCrypt("Model occlusion"), &config->misc.disableModelOcclusion);
         ImGui::Checkbox(skCrypt("HUD blur"), &config->misc.disablePanoramablur);
+        
         ImGui::EndPopup();
     }
     ImGui::PopID();
@@ -1643,7 +1647,7 @@ void GUI::renderVisualsWindow() noexcept
     ImGui::hotkey2("", config->visuals.thirdperson.key);
     ImGui::PopID();
 
-    /*
+    //mask changer
     ImGui::Checkbox(skCrypt("Mask changer"), &config->misc.mask);
     ImGui::SameLine();
     ImGui::PushID("mask");
@@ -1657,7 +1661,7 @@ void GUI::renderVisualsWindow() noexcept
         ImGui::EndPopup();
     }
     ImGui::PopID();
-    */
+    
 
     ImGui::Checkbox(skCrypt("Party mode"), &config->visuals.partyMode);
     ImGui::PopID();

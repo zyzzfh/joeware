@@ -59,7 +59,7 @@ void trace_line(Vector start, Vector end, unsigned int mask, TraceFilter filter,
 
     interfaces->engineTrace->traceRay(ray, mask, filter, tr);
 }
-
+/*
 void Visuals::shadowChanger() noexcept
 {
     static auto cl_csm_rot_override = interfaces->cvar->findVar(skCrypt("cl_csm_rot_override"));
@@ -78,7 +78,7 @@ void Visuals::shadowChanger() noexcept
     cl_csm_rot_x->setValue(config->visuals.shadowsChanger.x);
     cl_csm_rot_y->setValue(config->visuals.shadowsChanger.y);
 }
-
+*/
 #define SMOKEGRENADE_LIFETIME 17.85f
 
 struct smokeData
@@ -86,6 +86,8 @@ struct smokeData
     float destructionTime;
     Vector pos;
 };
+
+
 
 static std::vector<smokeData> smokes;
 
@@ -1150,7 +1152,7 @@ void Visuals::dmgMarker(GameEvent* event) noexcept
             return;
 
         interfaces->surface->setTextColor(color.color[0] * 255, color.color[1] * 255, color.color[2] * 255, color.color[3] * 255);
-        interfaces->surface->setTextFont(hooks->tahomaBoldAA);
+        interfaces->surface->setTextFont(hooks->nameEsp);
         interfaces->surface->setTextPosition(screen.x, screen.y);
         interfaces->surface->printText(damage);
     }
@@ -2065,7 +2067,7 @@ void Visuals::reset(int resetType) noexcept
         static auto cl_csm_rot_override = interfaces->cvar->findVar(skCrypt("cl_csm_rot_override"));
         bright->setValue(0);
         sky->setValue(1);
-        shadows->setValue(1);
+        shadows->setValue(0); //1
         cl_csm_rot_override->setValue(0);
 
         const bool thirdPerson = config->visuals.thirdperson.enable && config->visuals.thirdperson.key.isActive() && localPlayer && localPlayer->isAlive();
