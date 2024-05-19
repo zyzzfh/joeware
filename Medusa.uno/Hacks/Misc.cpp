@@ -4065,8 +4065,8 @@ void Misc::hurtIndicator() noexcept
     ImGui::SetNextWindowSizeConstraints({ 0, -1 }, { FLT_MAX, -1 });
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 4.5f);
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4{ 0.0f, 0.0f, 0.0f, 1.0f });
-    //if (config->misc.borders)
-    //ImGui::PushStyleColor(ImGuiCol_Border, { config->menu.accentColor.color[0], config->menu.accentColor.color[1], config->menu.accentColor.color[2], config->menu.accentColor.color[3] });
+    if (config->misc.borders)
+    ImGui::PushStyleColor(ImGuiCol_Border, { config->menu.accentColor.color[0], config->menu.accentColor.color[1], config->menu.accentColor.color[2], config->menu.accentColor.color[3] });
     ImGui::Begin(skCrypt("Hurt Indicator"), nullptr, ImGuiWindowFlags_NoTitleBar | (gui->isOpen() ? 0 : ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoDecoration));
 
     std::ostringstream ss; ss << skCrypt("Slowed down ") << static_cast<int>(local.velocityModifier * 100.f) << "%";
@@ -4279,7 +4279,7 @@ void Misc::killMessage(GameEvent& event) noexcept
         killMessage = skCrypt("𝒖 𝒕𝒉𝒊𝒏𝒌 𝒖 𝒂𝒓𝒆 𝒔𝒊𝒈𝒎𝒂?");
         break;
     case 9:
-        killMessage = skCrypt("𝕗𝕒𝕥 𝕡𝕚𝕘 𝔸ℂ𝔼^ 𝕤𝕖𝕟𝕥 𝕓𝕒𝕔𝕜 𝕥𝕠 𝕞𝕔𝕕𝕠𝕟𝕒𝕝𝕕𝕤");
+        killMessage = skCrypt("My naam is Hennie Kotze en ek is n ninja 0743266242 bel my ;). My kinders se naam is Dylan en Stephanie hulle is poes lelik");
         break;
     case 10:
         killMessage = skCrypt("ALL DOG GO 2 HEAVEN BUT U ARE PUSSYCAT");
@@ -4288,16 +4288,16 @@ void Misc::killMessage(GameEvent& event) noexcept
         killMessage = skCrypt("𝗘𝗔𝗧 𝗧𝗛𝗜𝗦 𝗕𝗨𝗟𝗜𝗧 𝗣𝗜𝗚");
         break;
     case 12:
-        killMessage = skCrypt("𝔾𝕆𝔻 𝕊𝔼ℕ𝕋 𝕄𝔼 𝕋𝕆 ℍ𝕊 'sigma'"); 
+        killMessage = skCrypt("address: fauna 109 eland cres Bloemfontein"); 
         break;
     case 14:
-        killMessage = skCrypt("𝙸 𝚠𝚒𝚕𝚕 𝚋𝚎𝚌𝚘𝚖𝚎 𝚕𝚎𝚐𝚎𝚗𝚍 𝚝𝚘 𝚖𝚢 𝚏𝚊𝚖𝚒𝚕𝚢");
+        killMessage = skCrypt("https://www.facebook.com/hennie.kotze.7 ");
         break;
     case 15:
         killMessage = skCrypt("𝕚 𝕔𝕒𝕟𝕥 𝕖𝕩𝕚𝕤𝕥 𝕨𝕚𝕥𝕙𝕠𝕦𝕥 𝕪𝕠𝕦 𝕟𝕚𝕘𝕘𝕒𝕤 𝕙𝕒𝕥𝕚𝕟𝕘 𝕞𝕖");
         break;
     case 16:
-        killMessage = skCrypt("𝕚 𝕥𝕒𝕜𝕖 𝕪𝕠𝕦 𝕥𝕠 𝕥𝕙𝕖 𝕒𝕗𝕥𝕖𝕣𝕝𝕚𝕗𝕖 𝕒𝕟𝕕 𝕪𝕠𝕦 𝕤𝕙𝕠𝕦𝕝𝕕 𝕠𝕗 𝕨𝕖𝕟𝕥 𝕥𝕠 𝕙𝕖𝕒𝕧𝕖𝕟 𝕓𝕦𝕥 𝕪𝕠𝕦 𝕗𝕒𝕝𝕝𝕖𝕣𝕖𝕕 𝕠𝕗𝕗 𝕥𝕙𝕖 𝕤𝕥𝕒𝕚𝕣𝕤 𝕠𝕓𝕖𝕤𝕖 𝕕𝕠𝕘");
+        killMessage = skCrypt("dylan your mothers a kaffer and shes dead");
         break;
     case 17:
         killMessage = skCrypt("𝕀 𝕂𝕀𝕃𝕃𝔼𝔻 ℍ𝕀𝕊 𝕎ℍ𝕆𝕃𝔼 𝔽𝔸𝕄𝕀𝕃𝕐");
@@ -4306,7 +4306,7 @@ void Misc::killMessage(GameEvent& event) noexcept
         killMessage = skCrypt("𝕟𝕠 𝕕𝕒𝕥𝕒𝕓𝕒𝕤𝕖 𝕨𝕚𝕝𝕝 𝕤𝕒𝕧𝕖 𝕪𝕠𝕦 𝕗𝕣𝕠𝕞 𝕥𝕙𝕖𝕤𝕖 𝕙𝕤");
         break;
     case 19:
-        killMessage = skCrypt("𝕤𝕚𝕘𝕞𝕒 𝕟𝕚𝕔𝕖 𝕡𝕣𝕠𝕥𝕖𝕔𝕥𝕚𝕠𝕟 𝕥𝕠 𝕤𝕚𝕘𝕞𝕒 𝕡𝕣𝕖𝕕𝕚𝕔𝕥 𝕚𝕥𝕤 𝕖𝕫 𝕥𝕠 𝕔𝕣𝕒𝕔𝕜 𝕦𝕣 𝕥𝕣𝕒𝕤𝕙 𝕝𝕦𝕒");
+        killMessage = skCrypt("Love your enemies, do good to those who hate you,bless those who curse you, pray for those who mistreat you. - Luke 6:27-29");
         break;
     case 20:
         killMessage = skCrypt("𝐄𝐈𝐓𝐇𝐄𝐑 𝐈 𝐖𝐀𝐋𝐊 𝐋𝐈𝐊𝐄 𝐀 𝐊𝐈𝐍𝐆 𝐎𝐑 𝐈 𝐃𝐎𝐍𝐓 𝐆𝐈𝐕𝐄 𝐀 𝐅𝐔𝐂𝐊 𝐖𝐇𝐎 𝐓𝐇𝐄 𝐊𝐈𝐍𝐆 𝐈𝐒");

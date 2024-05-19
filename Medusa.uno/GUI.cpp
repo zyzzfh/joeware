@@ -49,7 +49,7 @@ float getTransparency() noexcept
 { 
     return std::clamp(gui->isOpen() ? toggleAnimationEnd : 0.f, 0.0f, 1.0f);
 }
-constexpr auto windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize
+constexpr auto windowFlags = ImGuiWindowFlags_NoCollapse // | ImGuiWindowFlags_NoResize
 | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
 static int activeTab = 1;
 
@@ -567,7 +567,7 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
     ImGui::PopID();
     ImGui::Separator();
     ImGui::PushItemWidth(110.0f);
-    ImGui::BeginChild(skCrypt("Ragebot weapons"), ImVec2{600, 30}, false);
+    ImGui::BeginChild(skCrypt("Ragebot weapons"), ImVec2{600, 30}, false); //30
     {
         if (activeTab == 2)
         {
@@ -693,9 +693,9 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
         }
     }
 
-   // ImGui::Combo("Hitbox priority", &config->rageBot[RcurrentCategory].prior_hit, "None\0Head\0Body\0");
-    //ImGui::Checkbox(skCrypt("Prefer safe-points"), &config->rageBot[RcurrentCategory].preferSafePoints);
-    //ImGui::hotkey2(skCrypt("Force baim"), config->preferBodyAim);
+    ImGui::Combo("Hitbox priority", &config->rageBot[RcurrentCategory].prior_hit, "None\0Head\0Body\0");
+    ImGui::Checkbox(skCrypt("Prefer safe-points"), &config->rageBot[RcurrentCategory].preferSafePoints);
+    ImGui::hotkey2(skCrypt("Prefer baim"), config->preferBodyAim);
     ImGui::hotkey2(skCrypt("Force baim"), config->forceBaim);
     ImGui::Text(skCrypt("Exploits"));
     ImGui::PushID(skCrypt("Doubletap"));
@@ -739,8 +739,8 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
         ImGui::SliderInt(skCrypt("Time limit"), &config->backtrack.timeLimit, 1, 200, "%d ms");
     }
 
-   // ImGui::Text(("Optimization:"));
-   // ImGui::Checkbox(("Limit scan"), &config->misc.bLimitScan);
+    ImGui::Text(("Optimization:"));
+    ImGui::Checkbox(("Limit scan"), &config->misc.bLimitScan);
 
     ImGui::PopItemWidth();
     ImGui::Columns(1);
@@ -896,10 +896,12 @@ void GUI::renderRageAntiAimWindow() noexcept
          }
      }
 
-     //ImGui::SliderInt(skCrypt("Move lean amount"), &config->condAA.moveBreakers, 0, 100, "%d");
+     ImGui::SliderInt(skCrypt("Move lean amount"), &config->condAA.moveBreakers, 0, 100, "%d");
 
      ImGui::PopItemWidth();
 }
+
+
 
 void GUI::renderChamsWindow() noexcept
 {
@@ -1011,7 +1013,7 @@ void renderESPpreview(ImDrawList* draw, ImVec2 pos) noexcept
 {
     pos.x += 690;
     pos.y += 550 / 2 - 300 / 2;
-    static auto Flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoBringToFrontOnFocus;
+    static auto Flags =  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoBringToFrontOnFocus; //ImGuiWindowFlags_NoResize |
     ImGui::SetNextWindowSize({ 185, 300 });
     ImGui::Begin("ESP PREVIEW", NULL,Flags);
     draw->AddRectFilled(pos, { pos.x + 185, pos.y + 300 }, ImColor(0.06f, 0.06f, 0.06f, 0.5f), 5.f);
@@ -1498,14 +1500,14 @@ void GUI::renderVisualsWindow() noexcept
 
     static const char* arrRadios[] = { ("2000's"), ("Rock"), ("Techno"), ("Rap"), ("Chill"), ("Club"), ("House"), ("8-Bit"), ("8-Bit Alternative"), ("Lo-Fi"), ("Eurobeat"), ("Nightcore"),("Radio 1"), ("Phonk") };
 
-   // ImGui::Checkbox(("Radio"), &config->misc.bEnableRadio);
-   // ImGui::hotkey(("##iRadioMuteHotKey"), config->misc.iRadioMuteHotKey);
-   // if (config->misc.bEnableRadio) {
-   //     ImGui::SliderFloat(("Volume"), &config->misc.flRadioVolume, 0.f, 100.f, ("%.1f%%"));
-   //     ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
-   //     ImGui::ListBox(("##Radio"), &config->misc.iRadioStation, arrRadios, IM_ARRAYSIZE(arrRadios));
-   //     ImGui::PopItemWidth();
-   // }
+    ImGui::Checkbox(("Radio"), &config->misc.bEnableRadio);
+   // ImGui::hotkey2("##iRadioMuteHotKey", &config->misc.iRadioMuteHotKey);
+    if (config->misc.bEnableRadio) {
+        ImGui::SliderFloat(("Volume"), &config->misc.flRadioVolume, 0.f, 100.f, ("%.1f%%"));
+        ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
+        ImGui::ListBox(("##Radio"), &config->misc.iRadioStation, arrRadios, IM_ARRAYSIZE(arrRadios));
+        ImGui::PopItemWidth();
+    }
 
     ImGui::PushID("COCK EXPLOIT");
     ImGuiCustom::colorPicker(skCrypt("Local Player Trail"), config->visuals.playerTrailColor);
@@ -1904,6 +1906,13 @@ void GUI::renderMovementWindow() noexcept
         ImGui::SliderInt("Prediction Amnt", &config->misc.autoPixelSurfPredAmnt, 2, 4, "%d ticks");
     }
     ImGui::PopItemWidth();
+}
+
+void GUI::renderDebugWindow() noexcept
+{
+    ImGui::Checkbox(skCrypt("experimental prediction"), &config->predTest);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip(skCrypt("This feature is mostly experimental, mostly better without it"));
 }
 
 void GUI::renderSkinChangerWindow() noexcept
@@ -2725,7 +2734,7 @@ void GUI::renderMiscWindow() noexcept
         Misc::unlockHiddenCvars();
 
     //if (ImGui::Button(skCrypt("Join Discord server")))
-    //   ShellExecuteA(NULL, NULL, skCrypt("https://discord.gg/XnGWg3uYED"), NULL, NULL, SW_SHOWNORMAL);
+    //   ShellExecuteA(NULL, NULL, skCrypt(""), NULL, NULL, SW_SHOWNORMAL);
 
     if (ImGui::Button(skCrypt("RAGE QUIT!")))
         hooks->uninstall();
@@ -2871,14 +2880,13 @@ void GUI::renderConfigWindow() noexcept
         ImGuiCustom::colorPicker(skCrypt("Accent color"), config->menu.accentColor);
         ImGui::Combo(skCrypt("Window style"), &config->menu.windowStyle, skCrypt("Rounded\0Top Line\0Bottom Line\0Glow\0Modern\0"));
         ImGui::SliderFloat(skCrypt("Window transparency"), &config->menu.transparency, 0, 100, "%.f");
-        //ImGui::Checkbox(skCrypt("Window borders"), &config->menu.accentColor);
-        //ImGui::Checkbox(skCrypt("PassatHook prediction"), &config->predTest);
-        //if (ImGui::IsItemHovered())
-            //ImGui::SetTooltip(skCrypt("This feature is mostly experimental, imo it hits better without it"));
+        //ImGui::Checkbox(skCrypt("Window borders"), &config->misc.borders);
+        //ImGui::Checkbox(skCrypt("Window borders"), &config->menu.outline_menu);
+        
 }
 
-//void Active() { ImGuiStyle* Style = &ImGui::GetStyle(); Style->Colors[ImGuiCol_Button] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); Style->Colors[ImGuiCol_ButtonActive] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); Style->Colors[ImGuiCol_ButtonHovered] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); }
-//void Hovered() { ImGuiStyle* Style = &ImGui::GetStyle(); Style->Colors[ImGuiCol_Button] = ImColor(14, 14, 14); Style->Colors[ImGuiCol_ButtonActive] = ImColor(14, 14, 14); Style->Colors[ImGuiCol_ButtonHovered] = ImColor(5, 5, 5); }
+void Active() { ImGuiStyle* Style = &ImGui::GetStyle(); Style->Colors[ImGuiCol_Button] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); Style->Colors[ImGuiCol_ButtonActive] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); Style->Colors[ImGuiCol_ButtonHovered] = ImColor(config->menu.accentColor.color[0] * 0.35f, config->menu.accentColor.color[1] * 0.35f, config->menu.accentColor.color[2] * 0.35f, 255.f); }
+void Hovered() { ImGuiStyle* Style = &ImGui::GetStyle(); Style->Colors[ImGuiCol_Button] = ImColor(14, 14, 14); Style->Colors[ImGuiCol_ButtonActive] = ImColor(14, 14, 14); Style->Colors[ImGuiCol_ButtonHovered] = ImColor(5, 5, 5); }
 void ActiveTab() {
     ImGuiStyle* Style = &ImGui::GetStyle();
     Style->Colors[ImGuiCol_Text] = ImColor(Helpers::calculateColor(config->menu.accentColor));
@@ -2922,14 +2930,14 @@ void GUI::renderGuiStyle() noexcept
     Style->Colors[ImGuiCol_HeaderActive] = ImColor(Helpers::calculateColor(config->menu.accentColor, 0.2f));
     Style->Colors[ImGuiCol_TitleBg] = ImColor(0, 0, 0);
     Style->Colors[ImGuiCol_TitleBgActive] = ImColor(0, 0, 0);
-    Style->Colors[ImGuiCol_Border] = ImColor(255, 255, 255, 0);
+    Style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0); //255, 255, 255
 
     Style->Colors[ImGuiCol_ScrollbarGrab] = ImColor(colorbar);
     Style->Colors[ImGuiCol_ScrollbarGrabActive] = ImColor(colorbar);
     Style->Colors[ImGuiCol_ScrollbarGrabHovered] = ImColor(colorbar);
     Style->FramePadding = { 4.5,4.5 };
     static auto Name = skCrypt("joeware");
-    static auto Flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings;
+    static auto Flags = ImGuiWindowFlags_NoTitleBar |  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings; //ImGuiWindowFlags_NoResize |
 
     static int activeSubTabLegitbot = 1;
     static int activeSubTabRagebot = 1;
@@ -3007,7 +3015,7 @@ void GUI::renderGuiStyle() noexcept
                         Style->Colors[ImGuiCol_ChildBg] = ImColor(14, 14, 14);
                         Style->Colors[ImGuiCol_Text] = ImColor(config->menu.accentColor.color[0], config->menu.accentColor.color[1], config->menu.accentColor.color[2], 255.f);
                         Style->Colors[ImGuiCol_Button] = ImColor(14, 14, 14);
-                        Style->Colors[ImGuiCol_Border] = ImColor(255, 255, 255, 0);
+                        Style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0); //255
                         Style->Colors[ImGuiCol_ButtonHovered] = ImColor(35, 35, 35);
                         Style->Colors[ImGuiCol_ButtonActive] = ImColor(65, 65, 65);
                         ImGui::SetCursorPos(ImVec2{ 0, 30 });
@@ -3022,25 +3030,25 @@ void GUI::renderGuiStyle() noexcept
                                 draw = ImGui::GetWindowDrawList();
                                 int disabled = Helpers::calculateColor(config->menu.accentColor);
                                 //Style->Colors[ImGuiCol_TextDisabled] = ImColor(Helpers::calculateColor(static_cast<float>(disabled * 0.75)));
-                                ImGui::PushFont(fonts.fIcons);
+                                ImGui::PushFont(fonts.espFont);
                                 Style->FrameRounding = 0.0f;
                                 if (activeTab == 1) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("R"), ImVec2{ 39, 32 })) activeTab = 1;
+                                if (ImGui::Button1(skCrypt("Legit"), ImVec2{ 39, 32 })) activeTab = 1;
                                 //ImGui::Spacing();
                                 if (activeTab == 2) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("L"), ImVec2{ 39, 32 })) activeTab = 2;
+                                if (ImGui::Button1(skCrypt("Rage"), ImVec2{ 39, 32 })) activeTab = 2;
                                 if (activeTab == 3) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("A"), ImVec2{ 39, 32 })) activeTab = 3;
+                                if (ImGui::Button1(skCrypt("Dodge"), ImVec2{ 39, 32 })) activeTab = 3;
                                 if (activeTab == 4) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("P"), ImVec2{ 39, 32 })) activeTab = 4;
+                                if (ImGui::Button1(skCrypt("Visual"), ImVec2{ 39, 32 })) activeTab = 4;
                                 ImGui::PopFont();
-                                ImGui::PushFont(fonts.tab_ico);
+                                ImGui::PushFont(fonts.espFont);
                                 if (activeTab == 5) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("D"), ImVec2{ 39, 32 })) activeTab = 5;
+                                if (ImGui::Button1(skCrypt("Misc"), ImVec2{ 39, 32 })) activeTab = 5;
                                 if (activeTab == 6) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("E"), ImVec2{ 39, 32 })) activeTab = 6;
+                                if (ImGui::Button1(skCrypt("Config"), ImVec2{ 39, 32 })) activeTab = 6;
                                 if (activeTab == 7 )ActiveTab(); else InactiveTab();
-                                //if (ImGui::Button1(skCrypt("M"), ImVec2{ 39, 32 })) activeTab = 7;
+                                if (ImGui::Button1(skCrypt("Debug"), ImVec2{ 39, 32 })) activeTab = 7;
                                 ImGui::PopFont();
                                 draw->AddRectFilled(ImVec2(pos.x + 39, pos.y + 0), ImVec2(pos.x + 41, pos.y + 1000), colorbar);
                             }
@@ -3119,15 +3127,16 @@ void GUI::renderGuiStyle() noexcept
                                         //Configs
                                         renderConfigWindow();
                                         break;
-                                   // case 7:
-                                     //   NadePrediction::drawGUI();
-                                     //   break;
+                                    case 7:
+                                        //Debug
+                                        renderDebugWindow();
+                                        break;
                                     default:
                                         break;
                                     }
                                 }
-                                //if (config->misc.borders)
-                                   // draw->AddRect({ 0,0 }, { 750 - 70, 555 }, colorbar, 5.f, 0, 2.f);
+                                if (config->misc.borders)
+                                    draw->AddRect({ 0,0 }, { 750 - 70, 555 }, colorbar, 5.f, 0, 2.f);
                                 ImGui::EndChild();
                             }
                             ImGui::EndChild();
@@ -3175,7 +3184,7 @@ void GUI::renderGuiStyle1() noexcept
     Style->Colors[ImGuiCol_ScrollbarGrabHovered] = ImColor(Helpers::calculateColor(config->menu.accentColor));
     Style->FramePadding = { 0.f, 0.f };
     static auto Name = skCrypt("joeware");
-    static auto Flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings;
+    static auto Flags = ImGuiWindowFlags_NoTitleBar |  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings; //ImGuiWindowFlags_NoResize |
     if (!ImGui::Begin(Name, NULL, Flags))
         return;
 

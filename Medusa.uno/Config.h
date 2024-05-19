@@ -424,7 +424,7 @@ public:
         ColorToggle molotovPolygon{ 1.0f, 0.27f, 0.0f, 0.3f };
         bool viewmodelInScope{ false };
         ColorToggle3 playerTrailColor{ 1.0f, 1.0f, 1.0f };
-        bool PostEnabled = false;
+        bool PostEnabled = true;
         float worldExposure = 0.0f;
         float modelAmbient = 0.0f;
         float bloomScale = 0.0f;
@@ -472,7 +472,7 @@ public:
         Misc() { clanTag[0] = '\0'; name[0] = '\0'; menuKey.keyMode = KeyMode::Toggle; }
         Color4 accentColor{ 1.0f, 1.0f, 1.0f, 1.0f };
         std::string test1;
-        bool borders{ true };
+        bool borders{ false };
         bool chatRevealer{ false };
         KeyBind menuKey = KeyBind::INSERT;
         float autoPeekRadius = 15.f;
