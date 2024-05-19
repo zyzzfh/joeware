@@ -1910,6 +1910,10 @@ void GUI::renderMovementWindow() noexcept
 
 void GUI::renderDebugWindow() noexcept
 {
+    ImGui::PushFont(fonts.fIcons);
+    ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
+    ImGui::PopFont();
+    ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
     ImGui::Checkbox(skCrypt("experimental prediction"), &config->predTest);
     if (ImGui::IsItemHovered())
         ImGui::SetTooltip(skCrypt("This feature is mostly experimental, mostly better without it"));
