@@ -671,13 +671,13 @@ void Animations::handlePlayers(FrameStage stage) noexcept
             record.mins = player.mins;
             record.maxs = player.maxs;
             std::copy(player.matrix.begin(), player.matrix.end(), record.matrix);
-            for (auto bone : { 8, 4, 3, 7, 6, 5,1 ,2 }) {
+            for (auto bone : { 8, 2, 5 }) {
                 record.positions.push_back(record.matrix[bone].origin());
             }
 
             player.backtrackRecords.push_front(record);
 
-            while (player.backtrackRecords.size() > 3 && player.backtrackRecords.size() > static_cast<size_t>(timeToTicks(timeLimit)))
+            while (player.backtrackRecords.size() > 1 && player.backtrackRecords.size() > static_cast<size_t>(timeToTicks(timeLimit))) //3 to 1
                 player.backtrackRecords.pop_back();
         }
         entity->updateClientSideAnimation();
