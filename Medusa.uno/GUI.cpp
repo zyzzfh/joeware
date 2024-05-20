@@ -136,15 +136,16 @@ GUI::GUI() noexcept
         fonts.tahoma28 = io.Fonts->AddFontFromFileTTF((path / "verdanab.ttf").string().c_str(), 28.0f, &cfg, Helpers::getFontGlyphRanges());
         if (!fonts.tahoma28)
             io.Fonts->AddFontDefault(&cfg);
-        //fonts.smallfonts = io.Fonts->AddFontFromFileTTF((path / "smalle.fon").string().c_str(), 9.0f, &cfg1, Helpers::getFontGlyphRanges());
-        fonts.smallfonts = io.Fonts->AddFontFromMemoryTTF((void*)smallestcock, sizeof(smallestcock), 12.0f, &cfg1, io.Fonts->GetGlyphRangesCyrillic());
+        //fonts.
+        //  = io.Fonts->AddFontFromFileTTF((path / "smalle.fon").string().c_str(), 9.0f, &cfg1, Helpers::getFontGlyphRanges());
+        fonts.smallfonts = io.Fonts->AddFontFromMemoryTTF((void*)smallestcock, sizeof(smallestcock), 22.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.weaponIcons = io.Fonts->AddFontFromMemoryTTF((void*)weaponIcon, sizeof(weaponIcon), 15.0f, &cfg1, io.Fonts->GetGlyphRangesCyrillic());
         fonts.fIcons = io.Fonts->AddFontFromMemoryTTF(iconsbyztechnology, sizeof(iconsbyztechnology), 20.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.logo = io.Fonts->AddFontFromMemoryTTF(main_logo, sizeof(main_logo), 20.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.logoBig = io.Fonts->AddFontFromMemoryTTF(main_logo, sizeof(main_logo), 50.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.nazi = io.Fonts->AddFontFromMemoryTTF(nazilol, sizeof(nazilol), 30.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.nades = io.Fonts->AddFontFromMemoryTTF(grenadesFont, sizeof(grenadesFont), 20.f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
-        fonts.espFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdana.ttf", 12.0f, &font_config);
+        fonts.espFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdana.ttf", 13.0f, &font_config);
         
         io.Fonts->AddFontDefault(&cfg);
         cfg.MergeMode = true;
@@ -327,6 +328,9 @@ void GUI::handleToggle() noexcept
         filtererrors2->setValue(skCrypt("MATERIAL"));
         static auto fpsMax = interfaces->cvar->findVar(skCrypt("fps_max"));
         fpsMax->setValue(0);
+        static auto Voice = interfaces->cvar->findVar(skCrypt("voice_loopback"));
+        Voice->setValue(1);
+
     }
 }
 
@@ -1500,14 +1504,14 @@ void GUI::renderVisualsWindow() noexcept
 
     static const char* arrRadios[] = { ("2000's"), ("Rock"), ("Techno"), ("Rap"), ("Chill"), ("Club"), ("House"), ("8-Bit"), ("8-Bit Alternative"), ("Lo-Fi"), ("Eurobeat"), ("Nightcore"),("Radio 1"), ("Phonk") };
 
-    ImGui::Checkbox(("Radio"), &config->misc.bEnableRadio);
+   // ImGui::Checkbox(("Radio"), &config->misc.bEnableRadio);
    // ImGui::hotkey2("##iRadioMuteHotKey", &config->misc.iRadioMuteHotKey);
-    if (config->misc.bEnableRadio) {
-        ImGui::SliderFloat(("Volume"), &config->misc.flRadioVolume, 0.f, 100.f, ("%.1f%%"));
-        ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
-        ImGui::ListBox(("##Radio"), &config->misc.iRadioStation, arrRadios, IM_ARRAYSIZE(arrRadios));
-        ImGui::PopItemWidth();
-    }
+   // if (config->misc.bEnableRadio) {
+  //      ImGui::SliderFloat(("Volume"), &config->misc.flRadioVolume, 0.f, 100.f, ("%.1f%%"));
+   //     ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
+  //      ImGui::ListBox(("##Radio"), &config->misc.iRadioStation, arrRadios, IM_ARRAYSIZE(arrRadios));
+  //      ImGui::PopItemWidth();
+  //  }
 
     ImGui::PushID("COCK EXPLOIT");
     ImGuiCustom::colorPicker(skCrypt("Local Player Trail"), config->visuals.playerTrailColor);
@@ -1540,7 +1544,7 @@ void GUI::renderVisualsWindow() noexcept
         ImGui::PopID();
     }
 
-    ImGui::Checkbox("No shadows", &config->visuals.noShadows);
+    //ImGui::Checkbox("No shadows", &config->visuals.noShadows);
 
 
   /*  ImGui::Checkbox(skCrypt("Shadow changer"), &config->visuals.shadowsChanger.enabled);
@@ -1910,7 +1914,7 @@ void GUI::renderMovementWindow() noexcept
 
 void GUI::renderDebugWindow() noexcept
 {
-    ImGui::PushFont(fonts.fIcons);
+    ImGui::PushFont(fonts.tahoma34);
     ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
     ImGui::PopFont();
     ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
@@ -3034,25 +3038,25 @@ void GUI::renderGuiStyle() noexcept
                                 draw = ImGui::GetWindowDrawList();
                                 int disabled = Helpers::calculateColor(config->menu.accentColor);
                                 //Style->Colors[ImGuiCol_TextDisabled] = ImColor(Helpers::calculateColor(static_cast<float>(disabled * 0.75)));
-                                ImGui::PushFont(fonts.espFont);
+                                ImGui::PushFont(fonts.fIcons);
                                 Style->FrameRounding = 0.0f;
                                 if (activeTab == 1) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Legit"), ImVec2{ 39, 32 })) activeTab = 1;
+                                if (ImGui::Button1(skCrypt("R"), ImVec2{ 39, 32 })) activeTab = 1;
                                 //ImGui::Spacing();
                                 if (activeTab == 2) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Rage"), ImVec2{ 39, 32 })) activeTab = 2;
+                                if (ImGui::Button1(skCrypt("L"), ImVec2{ 39, 32 })) activeTab = 2;
                                 if (activeTab == 3) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Dodge"), ImVec2{ 39, 32 })) activeTab = 3;
+                                if (ImGui::Button1(skCrypt("A"), ImVec2{ 39, 32 })) activeTab = 3;
                                 if (activeTab == 4) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Visual"), ImVec2{ 39, 32 })) activeTab = 4;
+                                if (ImGui::Button1(skCrypt("P"), ImVec2{ 39, 32 })) activeTab = 4;
                                 ImGui::PopFont();
-                                ImGui::PushFont(fonts.espFont);
+                                ImGui::PushFont(fonts.tab_ico);
                                 if (activeTab == 5) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Misc"), ImVec2{ 39, 32 })) activeTab = 5;
+                                if (ImGui::Button1(skCrypt("D"), ImVec2{ 39, 32 })) activeTab = 5;
                                 if (activeTab == 6) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Config"), ImVec2{ 39, 32 })) activeTab = 6;
+                                if (ImGui::Button1(skCrypt("E"), ImVec2{ 39, 32 })) activeTab = 6;
                                 if (activeTab == 7 )ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("Debug"), ImVec2{ 39, 32 })) activeTab = 7;
+                                if (ImGui::Button1(skCrypt("M"), ImVec2{ 39, 32 })) activeTab = 7;
                                 ImGui::PopFont();
                                 draw->AddRectFilled(ImVec2(pos.x + 39, pos.y + 0), ImVec2(pos.x + 41, pos.y + 1000), colorbar);
                             }

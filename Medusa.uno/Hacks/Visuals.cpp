@@ -940,13 +940,22 @@ void Visuals::remove3dSky() noexcept
 {
     static auto sky = interfaces->cvar->findVar(skCrypt("r_3dsky"));
     sky->setValue(!config->visuals.no3dSky);
+
+    static auto shadows = interfaces->cvar->findVar(skCrypt("cl_csm_enabled"));
+    shadows->setValue(1);
+
+    static auto cl_foot_contact_shadows = interfaces->cvar->findVar(skCrypt("cl_foot_contact_shadows"));
+    cl_foot_contact_shadows->setValue(0); 
+
+    static auto cl_minimal_rtt_shadows = interfaces->cvar->findVar(skCrypt("cl_minimal_rtt_shadows"));
+    cl_minimal_rtt_shadows->setValue(0);
 }
 
 void Visuals::removeShadows() noexcept
 {
-    static auto shadows = interfaces->cvar->findVar(skCrypt("cl_csm_enabled"));
-    shadows->setValue(!config->visuals.noShadows);
+    
 }
+
 
 void Visuals::applyZoom(FrameStage stage) noexcept
 {

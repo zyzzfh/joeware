@@ -2438,21 +2438,21 @@ void Misc::Indictators() noexcept
             interfaces->surface->setTextColor(255, 255, 255, 255);
             interfaces->surface->setTextFont(hooks->smallFonts);
             interfaces->surface->setTextPosition(s.x / 2 + 7, s.y / 2 + 9 * offset);
-            std::string text1 = c_xor("JOEWARE");
+            std::string text1 = c_xor("");
             interfaces->surface->printText(std::wstring(text1.begin(), text1.end()));
-            auto textSize = interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE");
+            auto textSize = interfaces->surface->getTextSize(hooks->smallFonts, L"");
             if (!config->misc.indicators.color.rainbow)
                 interfaces->surface->setTextColor(255 * config->misc.indicators.color.color[0], 255 * config->misc.indicators.color.color[1], 255 * config->misc.indicators.color.color[2], 255 * (std::sin(memory->globalVars->currenttime * 5) * 0.5f + 0.5f));
             else
                 interfaces->surface->setTextColor(rainbowColor(config->misc.indicators.color.rainbowSpeed));
             interfaces->surface->setTextFont(hooks->smallFonts);
             interfaces->surface->setTextPosition(s.x / 2 + 7 + textSize.first, s.y / 2 + 9 * offset);
-            std::string text2 = c_xor(".CC");
+            std::string text2 = c_xor(""); //.cc
             interfaces->surface->printText(std::wstring(text2.begin(), text2.end()));
             offset += 1;
         }
         interfaces->surface->setDrawColor(255, 255, 255, 255);
-        interfaces->surface->drawLine(s.x / 2 + 7, s.y / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").second + 9, s.x / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").first + 7, s.y / 2 + 9 + interfaces->surface->getTextSize(hooks->smallFonts, L"JOEWARE").second);
+        interfaces->surface->drawLine(s.x / 2 + 7, s.y / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"").second + 9, s.x / 2 + interfaces->surface->getTextSize(hooks->smallFonts, L"").first + 7, s.y / 2 + 9 + interfaces->surface->getTextSize(hooks->smallFonts, L"").second);
         if ((config->misc.indicators.toShow & 1 << ITriggerBot) == 1 << ITriggerBot)
         {
             if (config->triggerbotKey.isActive() && config->lgb.enableTriggerbot)
