@@ -26,7 +26,7 @@ BOOL APIENTRY DllEntryPoint(HMODULE moduleHandle, DWORD reason, LPVOID reserved)
             SetPriorityClass(current_process, HIGH_PRIORITY_CLASS);
 
         std::setlocale(LC_CTYPE, ".utf8");
-       // PlaySoundA(skCrypt("F:\\cheat\\beta(1)\\joeware\\Medusa.uno\\jarvis.wav"), NULL, SND_SYNC);  //jarvis
+        //PlaySoundA(skCrypt("C:\Windows\Media\notify.wav"), NULL, SND_SYNC);  //jarvis
         hooks = std::make_unique<Hooks>(moduleHandle);
         
     }

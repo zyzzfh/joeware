@@ -454,7 +454,7 @@ static void drawWarning(ImDrawList* drawList, const Vector& worldPoint, WeaponId
 	constexpr auto radius = 20.f;
 	if (Helpers::worldToScreen(worldPoint, screenPosition))
 	{
-		drawList->AddCircleFilled(screenPosition, radius, ImGui::GetColorU32(ImVec4(0.f, 0.f, 0.f, .4f)), 40);
+		drawList->AddCircleFilled(screenPosition, radius, ImGui::GetColorU32(ImVec4(0.1f, 0.1f, 0.1f, 0.0f)), 40);  //.0 must be 0.4
 		std::string icon;
 		switch (type)
 		{
@@ -503,32 +503,32 @@ void NadePrediction::draw(ImDrawList* drawList, bool nadeView) noexcept
 	}
 }
 
-/*
+
 void NadePrediction::drawGUI() noexcept
 {
 	bool resetConfig = false;
 	ImGui::BeginChild(ImGui::GetID("nadePredictionTab"), { ImGui::GetContentRegionAvail().x * 0.5f ,-1 });
 	ImGui::Checkbox("Enable grenade prediction", &gpConfig.enabled);
 	ImGuiCustom::colorPicker("Trail", gpConfig.trail);
-	ImGuiCustom::colorPicker("Colision box", gpConfig.colision);
-	ImGuiCustom::colorPicker("Ground radius", gpConfig.ground);
+	//ImGuiCustom::colorPicker("Colision box", gpConfig.colision);
+	//ImGuiCustom::colorPicker("Ground radius", gpConfig.ground);
 	ImGui::Checkbox("Enable Grenade Warning", &gpConfig.warning.enabled);
 	ImGui::Checkbox("Enemies only", &gpConfig.warning.enemiesOnly);
 	ImGui::Checkbox("Flashbangs", &gpConfig.warning.flash);
 	ImGui::Checkbox("HE grenade", &gpConfig.warning.HE);
 	ImGui::Checkbox("Smoke grenade", &gpConfig.warning.smoke);
 	ImGui::Checkbox("Molotov/incendiary grenade", &gpConfig.warning.molotov);
-	ImGui::Checkbox("Decoy", &gpConfig.warning.decoy);
-	ImGui::Checkbox("Enable grenade view", &gpConfig.nadeView.enabled);
-	ImGui::Checkbox("When grenade Pinpulled only", &gpConfig.nadeView.pinpulledOnly);
-	ImGui::Checkbox("Hide title bar", &gpConfig.nadeView.noTitleBar);
-	ImGui::InputFloat("Camera Height", &gpConfig.nadeView.height, 10.f, 20.f, "%.0f");
-	gpConfig.nadeView.height = max(gpConfig.nadeView.height, 50.0f);
-	ImGui::InputFloat("Camera FOV", &gpConfig.nadeView.FOV, 10.f, 20.f, "%.0f");
-	gpConfig.nadeView.FOV = std::clamp(gpConfig.nadeView.FOV, 40.0f, 150.f);
+	//ImGui::Checkbox("Decoy", &gpConfig.warning.decoy);
+	//ImGui::Checkbox("Enable grenade view", &gpConfig.nadeView.enabled);
+	//ImGui::Checkbox("When grenade Pinpulled only", &gpConfig.nadeView.pinpulledOnly);
+	//ImGui::Checkbox("Hide title bar", &gpConfig.nadeView.noTitleBar);
+	//ImGui::InputFloat("Camera Height", &gpConfig.nadeView.height, 10.f, 20.f, "%.0f");
+	//gpConfig.nadeView.height = max(gpConfig.nadeView.height, 50.0f);
+	//ImGui::InputFloat("Camera FOV", &gpConfig.nadeView.FOV, 10.f, 20.f, "%.0f");
+	//gpConfig.nadeView.FOV = std::clamp(gpConfig.nadeView.FOV, 40.0f, 150.f);
 
-	ImGui::InputFloat("Camera Speed", &gpConfig.nadeView.speed, 10.f, 20.f, "%.0f");
-}*/
+	//ImGui::InputFloat("Camera Speed", &gpConfig.nadeView.speed, 10.f, 20.f, "%.0f");
+}
 
 //void computeCustomViewmatrix()
 //{

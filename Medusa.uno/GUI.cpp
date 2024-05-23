@@ -43,6 +43,9 @@
 #include <string>
 #include "SDK/InputSystem.h"
 #include <algorithm>
+#include "Hacks/NadePredEXP.h"
+
+
 inline constexpr float animationLength() { return 0.45f; }
 float toggleAnimationEnd = 0.0f;
 float getTransparency() noexcept 
@@ -51,7 +54,7 @@ float getTransparency() noexcept
 }
 constexpr auto windowFlags = ImGuiWindowFlags_NoCollapse // | ImGuiWindowFlags_NoResize
 | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-static int activeTab = 1;
+static int activeTab = 2;
 
 static ImFont* addFontFromVFONT(const std::string& path, float size, const ImWchar* glyphRanges, bool merge) noexcept
 {
@@ -127,12 +130,16 @@ GUI::GUI() noexcept
         fonts.tahoma16 = io.Fonts->AddFontFromFileTTF((path / "verdana.ttf").string().c_str(), 16.0f, &cfg, Helpers::getFontGlyphRanges());
         if (!fonts.tahoma16)
             io.Fonts->AddFontDefault(&cfg);
-        fonts.tahoma9 = io.Fonts->AddFontFromFileTTF((path / "verdana.ttf").string().c_str(), 9.0f, &cfg, Helpers::getFontGlyphRanges());
+        fonts.tahoma9 = io.Fonts->AddFontFromFileTTF((path / "verdana.ttf").string().c_str(), 14.0f, &cfg, Helpers::getFontGlyphRanges());
         if (!fonts.tahoma9)
             io.Fonts->AddFontDefault(&cfg);
-        fonts.tab_ico = io.Fonts->AddFontFromMemoryTTF((void*)main_icon, sizeof(main_icon), 20.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
-        if (!fonts.tab_ico)
-            io.Fonts->AddFontDefault(&cfg);
+        //fonts.tab_ico = io.Fonts->AddFontFromFileTTF((path / "badcache.ttf").string().c_str(), 20.0f, &cfg, Helpers::getFontGlyphRanges());
+        //if (!fonts.tab_ico)
+            //io.Fonts->AddFontDefault(&cfg);
+        
+        //fonts.tab_ico2 = io.Fonts->AddFontFromFileTTF((path / "osmiummenufont.ttf").string().c_str(), 20.0f, &cfg, Helpers::getFontGlyphRanges());
+        //if (!fonts.tab_ico2)
+        //    io.Fonts->AddFontDefault(&cfg);
         fonts.tahoma28 = io.Fonts->AddFontFromFileTTF((path / "verdanab.ttf").string().c_str(), 28.0f, &cfg, Helpers::getFontGlyphRanges());
         if (!fonts.tahoma28)
             io.Fonts->AddFontDefault(&cfg);
@@ -145,7 +152,9 @@ GUI::GUI() noexcept
         fonts.logoBig = io.Fonts->AddFontFromMemoryTTF(main_logo, sizeof(main_logo), 50.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.nazi = io.Fonts->AddFontFromMemoryTTF(nazilol, sizeof(nazilol), 30.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
         fonts.nades = io.Fonts->AddFontFromMemoryTTF(grenadesFont, sizeof(grenadesFont), 20.f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
-        fonts.espFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdana.ttf", 13.0f, &font_config);
+        fonts.espFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdana.ttf", 14.0f, &font_config);
+        fonts.tab_ico = io.Fonts->AddFontFromFileTTF("C:\\Users\\Charl\\AppData\\Local\\Microsoft\\Windows\\Fonts\\badcache.ttf", 35.0f, &font_config);
+        fonts.tab_ico2 = io.Fonts->AddFontFromFileTTF("C:\\Users\\Charl\\AppData\\Local\\Microsoft\\Windows\\Fonts\\osmiummenufont.ttf", 35.0f, &font_config);
         
         io.Fonts->AddFontDefault(&cfg);
         cfg.MergeMode = true;
@@ -344,6 +353,7 @@ static void menuBarItem(const char* name, bool& enabled) noexcept
 }
 void renderLegitBotWindow() noexcept
 {
+    
     static const char* hitboxes[]{ "Head","Chest","Stomach","Arms","Legs" };
     static bool hitbox[ARRAYSIZE(hitboxes)] = { false, false, false, false, false };
     static std::string previewvalue = "";
@@ -361,6 +371,7 @@ void renderLegitBotWindow() noexcept
         ImGui::BeginChildFrame(1, { 308, 460 });
         ImGui::EndChildFrame();
     }*/
+    ImGui::PushFont(gui->espFont());
     ImGui::PushID(skCrypt("Key"));
     ImGui::Checkbox(skCrypt("Enable Legitbot"), &config->lgb.enabled);
     ImGui::SameLine();
@@ -563,7 +574,7 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
     static bool hitbox[ARRAYSIZE(hitboxes)] = { false, false, false, false, false, false, false, false };
     static std::string previewvalue = "";
     bool once = false;
-
+    ImGui::PushFont(gui->espFont());
     ImGui::Checkbox(skCrypt("Enable ragebot"), &config->ragebot.enabled);
     ImGui::SameLine();
     ImGui::PushID(skCrypt("smth Key"));
@@ -711,7 +722,7 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
     ImGui::NextColumn();
     ImGui::Checkbox(skCrypt("Override config"), &config->rageBot[RcurrentCategory].enabled);
     ImGui::PushItemWidth(200.0f);
-    ImGui::SliderFloat(skCrypt("Fov"), &config->ragebot.fov, 0.0f, 255.0f, "%.2f", ImGuiSliderFlags_Logarithmic);
+    ImGui::SliderFloat(skCrypt("Fov"), &config->ragebot.fov, 0.0f, 180.0f, "%.2f", ImGuiSliderFlags_Logarithmic);
     ImGui::SliderInt(skCrypt("Hitchance"), &config->rageBot[RcurrentCategory].hitChance, 0, 100, "%d");
     ImGui::SliderFloat("Accuracy boost", &config->rageBot[RcurrentCategory].accuracyBoost, 0, 1.0f, "%.2f");
     ImGui::SliderInt(skCrypt("Multipoint head"), &config->rageBot[RcurrentCategory].multiPointHead, 0, 100, "%d");
@@ -752,6 +763,7 @@ void renderRageBotWindow(ImDrawList* drawList) noexcept
 
 void GUI::renderRageAntiAimWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 300.f);
     ImGui::PushItemWidth(190.0f);
@@ -796,15 +808,15 @@ void GUI::renderRageAntiAimWindow() noexcept
         ImGui::PopItemWidth();
     }
     ImGui::Checkbox(skCrypt("At targets"), &config->rageAntiAim[current_category].atTargets);
-    ImGui::Checkbox(skCrypt("Fake flick"), &config->rageAntiAim[current_category].fakeFlick);
-    ImGui::PushID(skCrypt("Fake flickerino"));
-    ImGui::SameLine();
-    ImGui::hotkey2("", config->fakeFlickOnKey, 80.f);
-    if (config->rageAntiAim[current_category].fakeFlick)
-    {
-        ImGui::SliderInt(skCrypt("Fake flick rate"), &config->rageAntiAim[current_category].fakeFlickRate, 5, 64, "%d");
-        ImGui::hotkey2(skCrypt("Fake flick flip"), config->flipFlick);
-    }
+    //ImGui::Checkbox(skCrypt("Fake flick"), &config->rageAntiAim[current_category].fakeFlick);
+   // ImGui::PushID(skCrypt("Fake flickerino"));
+    //ImGui::SameLine();
+    //ImGui::hotkey2("", config->fakeFlickOnKey, 80.f);
+    //if (config->rageAntiAim[current_category].fakeFlick)
+    //{
+    //    ImGui::SliderInt(skCrypt("Fake flick rate"), &config->rageAntiAim[current_category].fakeFlickRate, 5, 64, "%d");
+    //    ImGui::hotkey2(skCrypt("Fake flick flip"), config->flipFlick);
+    //}
     ImGui::PopItemWidth();
     ImGui::PopID();
     ImGui::hotkey2("Forward", config->manualForward, 60.f);
@@ -909,6 +921,7 @@ void GUI::renderRageAntiAimWindow() noexcept
 
 void GUI::renderChamsWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 370.0f);
     ImGui::Separator();
@@ -968,6 +981,7 @@ void GUI::renderChamsWindow() noexcept
 
 void GUI::renderGlowWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Separator();
 
     static int currentCategory{ 0 };
@@ -1015,6 +1029,7 @@ static int currentCategory;
 static auto currentItem = "All";
 void renderESPpreview(ImDrawList* draw, ImVec2 pos) noexcept
 {
+    ImGui::PushFont(gui->espFont());
     pos.x += 690;
     pos.y += 550 / 2 - 300 / 2;
     static auto Flags =  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoBringToFrontOnFocus; //ImGuiWindowFlags_NoResize |
@@ -1228,6 +1243,7 @@ void renderESPpreview(ImDrawList* draw, ImVec2 pos) noexcept
 
 void GUI::renderStreamProofESPWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::SetCursorPosX(8.f);
     if (ImGui::BeginChild(skCrypt("ESP")))
     {
@@ -1423,6 +1439,7 @@ void GUI::renderStreamProofESPWindow() noexcept
 
 void GUI::renderVisualsWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 334.0f);
     constexpr auto playerModels = "Default\0Special Agent Ava | FBI\0Operator | FBI SWAT\0Markus Delrow | FBI HRT\0Michael Syfers | FBI Sniper\0SAS\0B Squadron Officer | SAS\0D Squadron Officer | NZSAS\0Seal Team 6 Soldier | NSWC SEAL\0Buckshot | NSWC SEAL\0Lt. Commander Ricksaw | NSWC SEAL\0Third Commando Company | KSK\0'Two Times' McCoy | USAF TACP\0Primeiro Tenente | Brazilian 1st Battalion\0Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman\0Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman\0Lieutenant Rex Krikey | SEAL Frogman\0Dragomir | Sabre\0Rezan The Ready | Sabre\0'The Doctor' Romanov | Sabre\0Maximus | Sabre\0Blackwolf | Sabre\0The Elite Mr. Muhlik | Elite Crew\0Ground Rebel | Elite Crew\0Osiris | Elite Crew\0Prof. Shahmat | Elite Crew\0Enforcer | Phoenix\0Slingshot | Phoenix\0Soldier | Phoenix\0Pirate\0Pirate Variant A\0Pirate Variant B\0Pirate Variant C\0Pirate Variant D\0Anarchist\0Anarchist Variant A\0Anarchist Variant B\0Anarchist Variant C\0Anarchist Variant D\0Balkan Variant A\0Balkan Variant B\0Balkan Variant C\0Balkan Variant D\0Balkan Variant E\0Jumpsuit Variant A\0Jumpsuit Variant B\0Jumpsuit Variant C\0GIGN\0GIGN Variant A\0GIGN Variant B\0GIGN Variant C\0GIGN Variant D\0GSG9\0The proffesional Variant A\0The proffesional Variant B\0The proffesional Variant C\0The proffesional Variant D\0Street Soldier | Phoenix\0'Blueberries' Buckshot | NSWC SEAL\0'Two Times' McCoy | TACP Cavalry\0Rezan the Redshirt | Sabre\0Dragomir | Sabre Footsoldier\0Cmdr. Mae 'Dead Cold' Jamison | SWAT\0001st Lieutenant Farlow | SWAT\0John 'Van Healen' Kask | SWAT\0Bio-Haz Specialist | SWAT\0Sergeant Bombson | SWAT\0Chem-Haz Specialist | SWAT\0Lieutenant 'Tree Hugger' Farlow | SWAT\0Sir Bloody Miami Darryl | The Professionals\0Sir Bloody Silent Darryl | The Professionals\0Sir Bloody Skullhead Darryl | The Professionals\0Sir Bloody Darryl Royale | The Professionals\0Sir Bloody Loudmouth Darryl | The Professionals\0Safecracker Voltzmann | The Professionals\0Little Kev | The Professionals\0Number K | The Professionals\0Getaway Sally | The Professionals\0Trapper | Guerrilla Warfare\0Trapper Aggressor | Guerrilla Warfare\0Vypa Sista of the Revolution | Guerrilla Warfare\0Col. Mangos Dabisi | Guerrilla Warfare\0Arno The Overgrown | Guerrilla Warfare\0'Medium Rare' Crasswater | Guerrilla Warfare\0Crasswater The Forgotten | Guerrilla Warfare\0Elite Trapper Solman | Guerrilla Warfare\0Sous-Lieutenant Medic | Gendarmerie Nationale\0Chem-Haz Capitaine | Gendarmerie Nationale\0Chef d'Escadron Rouchard | Gendarmerie Nationale\0Aspirant | Gendarmerie Nationale\0Officer Jacques Beltram | Gendarmerie Nationale\0";
@@ -1814,6 +1831,7 @@ void GUI::renderVisualsWindow() noexcept
 
 void GUI::renderMovementWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 365.0f);
     ImGui::Checkbox(skCrypt("Bunny hop"), &config->misc.bunnyHop);
@@ -1914,17 +1932,19 @@ void GUI::renderMovementWindow() noexcept
 
 void GUI::renderDebugWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::PushFont(fonts.tahoma34);
     ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
     ImGui::PopFont();
     ImGui::LabelText("", "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.");
     ImGui::Checkbox(skCrypt("experimental prediction"), &config->predTest);
-    if (ImGui::IsItemHovered())
-        ImGui::SetTooltip(skCrypt("This feature is mostly experimental, mostly better without it"));
+    
+    
 }
 
 void GUI::renderSkinChangerWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::PushItemWidth(245.f);
     static auto itemIndex = 0;
     ImGui::Combo("##1", &itemIndex, [](void* data, int idx, const char** out_text) {
@@ -2304,6 +2324,7 @@ void GUI::renderSkinChangerWindow() noexcept
 #define InsertSlider(x1,x2,x3,x4,x5) ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::Spacing(); ImGui::NewLine(); ImGui::SameLine(42.f); ImGui::PushItemWidth(159.f); ImGui::SliderFloat(x1, &x2, x3, x4, x5); ImGui::PopItemWidth();
 void GUI::renderMiscWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 350.0f);
     hotkey3(skCrypt("Menu Key"), config->misc.menuKey);
@@ -2596,8 +2617,8 @@ void GUI::renderMiscWindow() noexcept
             ImGui::SetTooltip(c_xor("audio file must be put in csgo/sound/ directory"));
     }
     ImGui::PopID();
-   // ImGui::Checkbox("Opposite Hand Knife", &config->misc.oppositeHandKnife);
-    ImGui::Checkbox(skCrypt("Fix tablet signal"), &config->misc.fixTabletSignal);
+    ImGui::Checkbox("Opposite Hand Knife", &config->misc.oppositeHandKnife);
+    //ImGui::Checkbox(skCrypt("Fix tablet signal"), &config->misc.fixTabletSignal);
     ImGui::Checkbox(skCrypt("Sv pure bypass"), &config->misc.svPureBypass);
     ImGui::Checkbox(skCrypt("Unlock inventory"), &config->misc.inventoryUnlocker);
     ImGui::Checkbox(skCrypt("Preserve Killfeed"), &config->misc.preserveKillfeed.enabled);
@@ -2613,27 +2634,27 @@ void GUI::renderMiscWindow() noexcept
     }
     ImGui::PopID();
 
-    ImGui::Checkbox(skCrypt("Killfeed changer"), &config->misc.killfeedChanger.enabled);
-    ImGui::SameLine();
+   // ImGui::Checkbox(skCrypt("Killfeed changer"), &config->misc.killfeedChanger.enabled);
+   // ImGui::SameLine();
 
-    ImGui::PushID("Killfeed changer");
-    if (ImGui::Button("..."))
-        ImGui::OpenPopup("");
+   // ImGui::PushID("Killfeed changer");
+   // if (ImGui::Button("..."))
+   //     ImGui::OpenPopup("");
 
-    if (ImGui::BeginPopup("")) {
-        ImGui::Checkbox(skCrypt("Headshot"), &config->misc.killfeedChanger.headshot);
-        ImGui::Checkbox(skCrypt("Dominated"), &config->misc.killfeedChanger.dominated);
-        ImGui::SameLine();
-        ImGui::Checkbox(skCrypt("Revenge"), &config->misc.killfeedChanger.revenge);
-        ImGui::Checkbox(skCrypt("Penetrated"), &config->misc.killfeedChanger.penetrated);
-        ImGui::Checkbox(skCrypt("Noscope"), &config->misc.killfeedChanger.noscope);
-        ImGui::Checkbox(skCrypt("Thrusmoke"), &config->misc.killfeedChanger.thrusmoke);
-        ImGui::Checkbox(skCrypt("Attackerblind"), &config->misc.killfeedChanger.attackerblind);
-        ImGui::EndPopup();
-    }
-    ImGui::PopID();
+   // if (ImGui::BeginPopup("")) {
+   //     ImGui::Checkbox(skCrypt("Headshot"), &config->misc.killfeedChanger.headshot);
+   //     ImGui::Checkbox(skCrypt("Dominated"), &config->misc.killfeedChanger.dominated);
+  //      ImGui::SameLine();
+  //      ImGui::Checkbox(skCrypt("Revenge"), &config->misc.killfeedChanger.revenge);
+  //      ImGui::Checkbox(skCrypt("Penetrated"), &config->misc.killfeedChanger.penetrated);
+  //      ImGui::Checkbox(skCrypt("Noscope"), &config->misc.killfeedChanger.noscope);
+  //      ImGui::Checkbox(skCrypt("Thrusmoke"), &config->misc.killfeedChanger.thrusmoke);
+  //      ImGui::Checkbox(skCrypt("Attackerblind"), &config->misc.killfeedChanger.attackerblind);
+  //      ImGui::EndPopup();
+  //  }
+  //  ImGui::PopID();
 
-    ImGui::Checkbox(skCrypt("Reportbot"), &config->misc.reportbot.enabled);
+  /*  ImGui::Checkbox(skCrypt("Reportbot"), &config->misc.reportbot.enabled);
     ImGui::SameLine();
     ImGui::PushID("Reportbot");
 
@@ -2658,7 +2679,7 @@ void GUI::renderMiscWindow() noexcept
         ImGui::EndPopup();
     }
     ImGui::PopID();
-
+*/
     ImGui::Checkbox(skCrypt("Autobuy"), &config->misc.autoBuy.enabled);
     ImGui::SameLine();
 
@@ -2744,7 +2765,7 @@ void GUI::renderMiscWindow() noexcept
     //if (ImGui::Button(skCrypt("Join Discord server")))
     //   ShellExecuteA(NULL, NULL, skCrypt(""), NULL, NULL, SW_SHOWNORMAL);
 
-    if (ImGui::Button(skCrypt("RAGE QUIT!")))
+    if (ImGui::Button(skCrypt("unhook")))
         hooks->uninstall();
     ImGui::PopItemWidth();
     ImGui::Columns(1);
@@ -2768,6 +2789,7 @@ bool endswith(const char* string, char* end)
 
 void GUI::renderConfigWindow() noexcept
 {
+    ImGui::PushFont(gui->espFont());
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 260.0f);
 
@@ -2803,20 +2825,20 @@ void GUI::renderConfigWindow() noexcept
         }
         ImGui::PopID();
 
-        if (ImGui::Button(skCrypt("Open config directory"), ImVec2{ 250.0f, 25.0f }))
+        if (ImGui::Button(skCrypt("Open Directory"), ImVec2{ 250.0f, 25.0f }))
             config->openConfigDir();
 
-        if (ImGui::Button(skCrypt("Create config"), ImVec2{ 250.0f, 25.0f }))
+        if (ImGui::Button(skCrypt("Create Config"), ImVec2{ 250.0f, 25.0f }))
             config->add(buffer.c_str());
 
         if (currentConfig != -1) {
-            if (ImGui::Button(skCrypt("Load selected"), ImVec2{ 250.0f, 25.0f })) {
+            if (ImGui::Button(skCrypt("Load"), ImVec2{ 250.0f, 25.0f })) {
                 config->load(currentConfig, false);
                 SkinChanger::scheduleHudUpdate();
                 Misc::updateClanTag(true);
             }
             ImGui::PushID("SAVE");
-            if (ImGui::Button(skCrypt("Save selected"), ImVec2{ 250.0f, 25.0f }))
+            if (ImGui::Button(skCrypt("Save"), ImVec2{ 250.0f, 25.0f }))
                 ImGui::OpenPopup(skCrypt("##reallySave"));
             if (ImGui::BeginPopup(skCrypt("##reallySave")))
             {
@@ -2855,7 +2877,7 @@ void GUI::renderConfigWindow() noexcept
             ImGui::PopID();
         }
 
-        if (ImGui::Button(skCrypt("Reset selected"), ImVec2{ 250.0f, 25.0f }))
+        if (ImGui::Button(skCrypt("Reset"), ImVec2{ 250.0f, 25.0f }))
             ImGui::OpenPopup(skCrypt("Config to reset"));
 
         if (ImGui::BeginPopup(skCrypt("Config to reset"))) {
@@ -2964,11 +2986,11 @@ void GUI::renderGuiStyle() noexcept
         ImGui::BeginChild(skCrypt("##Back"), ImVec2{ 754- 70, 559 }, false);
         {
             ImGui::SetCursorPos(ImVec2{ 2, 2 });
-            Style->Colors[ImGuiCol_ChildBg] = ImColor(14, 14, 14);
-            Style->Colors[ImGuiCol_Button] = ImColor(14, 14, 14);
-            Style->Colors[ImGuiCol_Border] = ImColor(14, 14, 14, 0);
-            Style->Colors[ImGuiCol_ButtonHovered] = ImColor(35, 35, 35);
-            Style->Colors[ImGuiCol_ButtonActive] = ImColor(65, 65, 65);
+            Style->Colors[ImGuiCol_ChildBg] = ImColor(0, 0, 0);
+            Style->Colors[ImGuiCol_Button] = ImColor(0, 0, 0);
+            Style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0);
+            Style->Colors[ImGuiCol_ButtonHovered] = ImColor(0, 0, 0);
+            Style->Colors[ImGuiCol_ButtonActive] = ImColor(0, 0, 0);
             Style->ChildRounding = 0.0;
             ImGui::BeginChild(skCrypt("##Main"), ImVec2{ 750 - 70, 555 }, false);
             {
@@ -2989,7 +3011,7 @@ void GUI::renderGuiStyle() noexcept
                         draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f + 1, pos.y + 2), Helpers::calculateColor(config->menu.accentColor, 0.5f), skCrypt("")); //menu text
                         draw->AddText(fonts.tahoma34, 24.f, ImVec2(pos.x + 26.5f, pos.y + 1), ImColor(255.f, 255.f, 255.f, 255.f), skCrypt("")); //menu text
                         ImGui::SameLine();
-                        ImGui::PushFont(fonts.verdana);
+                        ImGui::PushFont(fonts.espFont);
                         if (activeTab == 4)
                         {
                             ImGui::SetCursorPosX(490.0f - 70 - 50 - 5);
@@ -3022,15 +3044,15 @@ void GUI::renderGuiStyle() noexcept
                         ImGui::EndChild();
                         Style->Colors[ImGuiCol_ChildBg] = ImColor(14, 14, 14);
                         Style->Colors[ImGuiCol_Text] = ImColor(config->menu.accentColor.color[0], config->menu.accentColor.color[1], config->menu.accentColor.color[2], 255.f);
-                        Style->Colors[ImGuiCol_Button] = ImColor(14, 14, 14);
+                        Style->Colors[ImGuiCol_Button] = ImColor(0, 0, 0);
                         Style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0); //255
-                        Style->Colors[ImGuiCol_ButtonHovered] = ImColor(35, 35, 35);
-                        Style->Colors[ImGuiCol_ButtonActive] = ImColor(65, 65, 65);
+                        Style->Colors[ImGuiCol_ButtonHovered] = ImColor(0, 0, 0);
+                        Style->Colors[ImGuiCol_ButtonActive] = ImColor(0, 0, 0);
                         ImGui::SetCursorPos(ImVec2{ 0, 30 });
                         ImGui::BeginChild(skCrypt("##Childs"), ImVec2{ 750 - 70, 525 }, false);
                         {
                             auto frameRoundingB = Style->FrameRounding;
-                            ImGui::BeginChild(skCrypt("##Left"), ImVec2{ 41, 525 }, false);
+                            ImGui::BeginChild(skCrypt("##Left"), ImVec2{ 71, 525 }, false); //41
                             {
                                 ImDrawList* draw;
                                 ImVec2 pos;
@@ -3038,39 +3060,46 @@ void GUI::renderGuiStyle() noexcept
                                 draw = ImGui::GetWindowDrawList();
                                 int disabled = Helpers::calculateColor(config->menu.accentColor);
                                 //Style->Colors[ImGuiCol_TextDisabled] = ImColor(Helpers::calculateColor(static_cast<float>(disabled * 0.75)));
-                                ImGui::PushFont(fonts.fIcons);
+                               
                                 Style->FrameRounding = 0.0f;
                                 if (activeTab == 1) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("R"), ImVec2{ 39, 32 })) activeTab = 1;
+                                //if (ImGui::Button1(skCrypt("Legit"), ImVec2{ 70, 70 })) activeTab = 1;
                                 //ImGui::Spacing();
                                 if (activeTab == 2) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("L"), ImVec2{ 39, 32 })) activeTab = 2;
+                                ImGui::PushFont(fonts.tab_ico);
+                                if (ImGui::Button1(skCrypt("A"), ImVec2{ 70, 70 })) activeTab = 2;
                                 if (activeTab == 3) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("A"), ImVec2{ 39, 32 })) activeTab = 3;
-                                if (activeTab == 4) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("P"), ImVec2{ 39, 32 })) activeTab = 4;
+                                ImGui::PopFont();
+                                ImGui::PushFont(fonts.tab_ico2);
+                                if (ImGui::Button1(skCrypt("F"), ImVec2{ 70, 70 })) activeTab = 3;
                                 ImGui::PopFont();
                                 ImGui::PushFont(fonts.tab_ico);
+                                if (activeTab == 4) ActiveTab(); else InactiveTab();
+                                if (ImGui::Button1(skCrypt("D"), ImVec2{ 70, 70 })) activeTab = 4;
+                                
+                               
                                 if (activeTab == 5) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("D"), ImVec2{ 39, 32 })) activeTab = 5;
+                                if (ImGui::Button1(skCrypt("G"), ImVec2{ 70, 70 })) activeTab = 5;
                                 if (activeTab == 6) ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("E"), ImVec2{ 39, 32 })) activeTab = 6;
-                                if (activeTab == 7 )ActiveTab(); else InactiveTab();
-                                if (ImGui::Button1(skCrypt("M"), ImVec2{ 39, 32 })) activeTab = 7;
                                 ImGui::PopFont();
-                                draw->AddRectFilled(ImVec2(pos.x + 39, pos.y + 0), ImVec2(pos.x + 41, pos.y + 1000), colorbar);
+                                ImGui::PushFont(fonts.tab_ico2);
+                                if (ImGui::Button1(skCrypt("E"), ImVec2{ 70, 70 })) activeTab = 6;
+                                if (activeTab == 7 )ActiveTab(); else InactiveTab();
+                                if (ImGui::Button1(skCrypt("L"), ImVec2{ 70, 70 })) activeTab = 7;
+                                ImGui::PopFont();
+                                //draw->AddRectFilled(ImVec2(pos.x + 39, pos.y + 0), ImVec2(pos.x + 41, pos.y + 1000), colorbar);
                             }
                             ImGui::EndChild();
                             Style->FrameRounding = 3.f;
                             Style->ChildRounding = 0;
-                            ImGui::SetCursorPos(ImVec2{ 41, 0 });
+                            ImGui::SetCursorPos(ImVec2{ 71, 0 });
                             Style->Colors[ImGuiCol_ChildBg] = ImColor(14, 14, 14);
                             Style->Colors[ImGuiCol_Text] = ImColor(255, 255, 255, 255);
-                            Style->Colors[ImGuiCol_Button] = ImColor(25, 25, 25);
-                            Style->Colors[ImGuiCol_ButtonHovered] = ImColor(65, 65, 65);
-                            Style->Colors[ImGuiCol_ButtonActive] = ImColor(45, 45, 45);
+                            Style->Colors[ImGuiCol_Button] = ImColor(0, 0, 0);
+                            Style->Colors[ImGuiCol_ButtonHovered] = ImColor(0, 0, 0);
+                            Style->Colors[ImGuiCol_ButtonActive] = ImColor(0, 0, 0);
                             Style->Colors[ImGuiCol_TextDisabled] = ImColor(144, 144, 144);
-                            ImGui::PushFont(fonts.verdana);
+                            ImGui::PushFont(fonts.espFont);
                             ImGui::BeginChild(skCrypt("##SubMain"), ImVec2{ 769 - 70 - 50, 525 }, false);
                             {
                                 ImGui::SetCursorPos(ImVec2{ 14, 12 });
@@ -3078,9 +3107,9 @@ void GUI::renderGuiStyle() noexcept
                                     //Style->Colors[ImGuiCol_Border] = ImColor(255, 255, 255, 145);
                                     switch (activeTab)
                                     {
-                                    case 1: //Legitbot
-                                         renderLegitBotWindow();
-                                         break;
+                                    //case 1: //Legitbot
+                                    //     renderLegitBotWindow();
+                                    //     break;
                                     case 2:
                                         renderRageBotWindow(draw);
                                         break;
@@ -3136,8 +3165,8 @@ void GUI::renderGuiStyle() noexcept
                                         renderConfigWindow();
                                         break;
                                     case 7:
-                                        //Debug
-                                        renderDebugWindow();
+                                        //NadePrediction?
+                                        NadePrediction::drawGUI();
                                         break;
                                     default:
                                         break;

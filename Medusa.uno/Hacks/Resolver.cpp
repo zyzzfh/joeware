@@ -1254,7 +1254,7 @@ void Resolver::resolve_entity(Animations::Players& player, Animations::Players p
         auto freestanding_yaw = 0.f;
 
         const auto current_shot = missed_shots1 % 2;
-        float max_desync_angle = 29.f;
+        float max_desync_angle = 29.f; 
 
         const auto plus_desync = entity->eyeAngles().y + max_desync_angle;
         const auto minus_desync = entity->eyeAngles().y - max_desync_angle;
@@ -1880,7 +1880,7 @@ void Resolver::processMissedShots() noexcept
         }
     }
     if (!resolverMissed)
-        Logger::addLog(std::string(skCrypt("missed shot due to ?")));
+        Logger::addLog(std::string(skCrypt("missed shot due to spread")));
 }
 
 void Resolver::runPreUpdate(Animations::Players player, Animations::Players prev_player, Entity* entity) noexcept

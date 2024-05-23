@@ -4246,7 +4246,7 @@ void Misc::killMessage(GameEvent& event) noexcept
         return;
 
     srand(time(0));
-    auto randomMessage = rand() % 21;
+    auto randomMessage = rand() % 22;
     std::string killMessage = "";
 
     switch (randomMessage)
@@ -4313,6 +4313,9 @@ void Misc::killMessage(GameEvent& event) noexcept
         break;
     case 21:
         killMessage = skCrypt("𝙸 𝚠𝚒𝚕𝚕 𝚋𝚎𝚌𝚘𝚖𝚎 𝚕𝚎𝚐𝚎𝚗𝚍 𝚝𝚘 𝚖𝚢 𝚏𝚊𝚖𝚒𝚕𝚢");
+        break;
+    case 22:
+        killMessage = skCrypt("my mom told me to stop swearing");
         break;
     }
 

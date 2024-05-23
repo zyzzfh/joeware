@@ -40,6 +40,7 @@ public:
         ImFont* tahoma9 = nullptr;
         ImFont* verdana11 = nullptr;
         ImFont* tab_ico = nullptr;
+        ImFont* tab_ico2 = nullptr;
         ImFont* fIcons = nullptr;
         ImFont* unicodeFont = nullptr;
         ImFont* verdana = nullptr;
@@ -64,6 +65,7 @@ private :
     void renderSkinChangerWindow() noexcept;
     void renderMiscWindow() noexcept;
     void renderConfigWindow() noexcept;
+    void renderNadeWindow() noexcept;
 
     float timeToNextConfigRefresh = 0.1f;
 };
