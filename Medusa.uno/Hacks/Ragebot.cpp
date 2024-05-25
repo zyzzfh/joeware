@@ -84,7 +84,7 @@ void runRagebot(UserCmd* cmd, Entity* entity, matrix3x4* matrix, Ragebot::Enemie
 
          if (Tickbase::isPeeking = true)
          {
-             if (cfg1[weaponIndex].autoStop && localPlayer->flags() & 1  && isSpreadEnabled->getInt() == 0) //& FL_ONGROUND &&!(cmd->buttons & UserCmd::IN_JUMP)
+             if (cfg1[weaponIndex].autoStop && localPlayer->flags() & 1 & FL_ONGROUND && !(cmd->buttons & UserCmd::IN_JUMP) && isSpreadEnabled->getInt() == 0)
              {
                  if ((cfg1[weaponIndex].autoStopMod & 1 << 0) == 1 << 0)
                  {
@@ -389,12 +389,12 @@ void Ragebot::run(UserCmd* cmd) noexcept
                     continue;
 
 
-              //  memcpy(entity->getBoneCache().memory, player.matrix.data(), std::clamp(entity->getBoneCache().size, 0, MAXSTUDIOBONES) * sizeof(matrix3x4));
-              //  memory->setAbsOrigin(entity, player.origin);
-              //  memory->setAbsAngle(entity, Vector{ 0.f, player.absAngle.y, 0.f });
-               // memory->setCollisionBounds(entity->getCollideable(), player.mins, player.maxs);
+                memcpy(entity->getBoneCache().memory, player.matrix.data(), std::clamp(entity->getBoneCache().size, 0, MAXSTUDIOBONES) * sizeof(matrix3x4));
+                memory->setAbsOrigin(entity, player.origin);
+                memory->setAbsAngle(entity, Vector{ 0.f, player.absAngle.y, 0.f });
+                memory->setCollisionBounds(entity->getCollideable(), player.mins, player.maxs);
 
-               // currentSimulationTime = player.simulationTime;
+                currentSimulationTime = player.simulationTime;
             }
 
             runRagebot(cmd, entity, entity->getBoneCache().memory, target, hitbox, activeWeapon, weaponIndex, localPlayerEyePosition, aimPunch, multiPointHead, multiPointBody, minDamage, damageDiff, bestAngle, bestTarget);
